@@ -43,6 +43,49 @@ public class GetBookingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
+    @Category({AllTests.class})
+    @DisplayName("Listar IDs de reservas com filtro de nome.")
+    public void validarListagemDeIdsDasReservasPorNome(){
+
+        getBookingRequest.bookingReturnIds2Filters("firstname","Sally","lastname","Brown")
+                .then()
+                .statusCode(200)
+                .body("size()",greaterThan(0))
+                .time(lessThan(5L), TimeUnit.SECONDS);
+
+    }
+
+    @Test
+    @Severity(SeverityLevel.BLOCKER)
+    @Category({AllTests.class})
+    @DisplayName("Listar IDs de reservas com filtro de data.")
+    public void validarListagemDeIdsDasReservasPorData(){
+
+        getBookingRequest.bookingReturnIds4Filters("firstname","Sally","lastname","Brown",
+                        "checkin","2014-03-13","checkout","2014-05-21")
+                .then()
+                .statusCode(200)
+                .body("size()",greaterThan(0))
+                .time(lessThan(5L), TimeUnit.SECONDS);
+
+    }
+
+    @Test
+    @Severity(SeverityLevel.BLOCKER)
+    @Category({AllTests.class})
+    @DisplayName("Listar reserva por id.")
+    public void validarBuscaDeReservasPorId(){
+
+        getBookingRequest.bookingById()
+                .then()
+                .statusCode(200)
+                .body("size()",greaterThan(0))
+                .time(lessThan(5L), TimeUnit.SECONDS);
+
+    }
+
+    @Test
+    @Severity(SeverityLevel.BLOCKER)
     @Category({ContractTests.class,AllTests.class})
     @DisplayName("Garantir o schema do retorno da listagem de reservas")
     public void validaSchemaDaListagemDeReservas(){

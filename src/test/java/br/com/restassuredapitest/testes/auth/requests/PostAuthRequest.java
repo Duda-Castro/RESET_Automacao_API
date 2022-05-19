@@ -18,7 +18,7 @@ public class PostAuthRequest {
         return given()
                 .header("Content-Type", "Application/json")
                 .when()
-                    .body(authPayloads.jsonAuthLogin().toString())
+                .body(authPayloads.jsonAuthLogin().toString())
                 .post("auth");
 
 
