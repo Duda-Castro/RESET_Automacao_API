@@ -2,6 +2,7 @@ package br.com.restassuredapitest.testes.ping.testes;
 
 import br.com.restassuredapitest.base.BaseTest;
 import br.com.restassuredapitest.suites.AllTests;
+import br.com.restassuredapitest.suites.HealthCheck;
 import br.com.restassuredapitest.testes.booking.requests.GetBookingRequest;
 import br.com.restassuredapitest.testes.ping.requests.GetPingRequest;
 import io.qameta.allure.Feature;
@@ -23,8 +24,8 @@ public class GetPingTest extends BaseTest {
 
 
     @Test
-        @Severity(SeverityLevel.BLOCKER)
-    @Category({AllTests.class})
+    @Severity(SeverityLevel.BLOCKER)
+    @Category({AllTests.class, HealthCheck.class})
     @DisplayName("Verificar se a api está online")
     public void validarListagemDeIdsDasReservas(){
 

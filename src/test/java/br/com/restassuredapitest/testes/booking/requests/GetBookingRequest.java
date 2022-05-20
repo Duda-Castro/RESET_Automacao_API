@@ -32,21 +32,8 @@ public class GetBookingRequest {
 
     }
 
-    @Step("Retorna os IDs da listagem de reservas com dois filtros.")
-    public Response bookingReturnIds2Filters(String filtro1, String valor1, String filtro2, String valor2){
-
-        return given()
-                .queryParam(filtro1,valor1)
-                .queryParam(filtro2,valor2)
-                .when()
-                .get("booking");
-
-
-
-
-    }
-    @Step("Retorna os IDs da listagem de reservas com quatro filtros.")
-    public Response bookingReturnIds4Filters(String filtro1, String valor1, String filtro2, String valor2,
+    @Step("Retorna os IDs da listagem de reservas com filtro.")
+    public Response bookingReturnIdsWithFilters(String filtro1, String valor1, String filtro2, String valor2,
                                            String filtro3, String valor3, String filtro4, String valor4){
 
         return given()
@@ -63,12 +50,12 @@ public class GetBookingRequest {
     }
 
     @Step("Retorna reserva com determinado ID.")
-    public Response bookingById() throws JSONException {
+    public Response bookingById(int id) throws JSONException {
 
         return given()
                 .header("Accept","application/json")
                 .when()
-                .get("booking/" + bookingFirstId());
+                .get("booking/" + id);
     }
 
 }

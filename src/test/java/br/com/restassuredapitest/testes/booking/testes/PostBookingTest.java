@@ -3,6 +3,7 @@ package br.com.restassuredapitest.testes.booking.testes;
 import br.com.restassuredapitest.base.BaseTest;
 import br.com.restassuredapitest.suites.AllTests;
 import br.com.restassuredapitest.suites.ContractTests;
+import br.com.restassuredapitest.suites.SchemaTest;
 import br.com.restassuredapitest.testes.booking.requests.GetBookingRequest;
 import br.com.restassuredapitest.testes.booking.requests.PostBookingRequest;
 import br.com.restassuredapitest.utils.Utils;
@@ -28,7 +29,7 @@ public class PostBookingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Category({AllTests.class})
+    @Category({AllTests.class, SchemaTest.class})
     @DisplayName("Cadastrar nova reserva.")
     public void validarCadastroDeNovaReserva(){
 

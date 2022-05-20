@@ -22,4 +22,15 @@ public class BookingPayloads {
         return payload;
         }
 
+    public static JSONObject data() throws JSONException {
+
+        JSONObject bookingDates = new JSONObject();
+
+
+        bookingDates.put("checkin","2018-01-01");
+        bookingDates.put("checkout","2019-01-01");
+
+        return bookingDates;
+    }
+
 }

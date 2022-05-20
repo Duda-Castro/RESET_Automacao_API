@@ -4,12 +4,13 @@ import br.com.restassuredapitest.base.BaseTest;
 import br.com.restassuredapitest.suites.AllTests;
 import br.com.restassuredapitest.suites.ContractTests;
 import br.com.restassuredapitest.testes.booking.requests.GetBookingRequest;
+import br.com.restassuredapitest.testes.booking.requests.payloads.BookingPayloads;
 import br.com.restassuredapitest.utils.Utils;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.junit4.DisplayName;
-import io.restassured.response.Response;
+import br.com.restassuredapitest.testes.booking.requests.payloads.BookingPayloads;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -18,15 +19,14 @@ import java.util.concurrent.TimeUnit;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchema;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.lessThan;
+import static org.hamcrest.Matchers.*;
 
 @Feature("Feature de retorno de reservas")
 public class GetBookingTest extends BaseTest {
 
     GetBookingRequest getBookingRequest = new GetBookingRequest();
 
-
+    //Listar IDs das reservas
     @Test
     @Severity(SeverityLevel.BLOCKER)
     @Category({AllTests.class})
@@ -41,45 +41,120 @@ public class GetBookingTest extends BaseTest {
 
     }
 
+    //Listar IDs de reservas utilizando o filtro firstname
     @Test
     @Severity(SeverityLevel.BLOCKER)
     @Category({AllTests.class})
-    @DisplayName("Listar IDs de reservas com filtro de nome.")
-    public void validarListagemDeIdsDasReservasPorNome(){
+    @DisplayName("Listar IDs de reservas utilizando o filtro firstname.")
+    public void validarListagemDeIdsComFiltroFirstName(){
 
-        getBookingRequest.bookingReturnIds2Filters("firstname","Sally","lastname","Brown")
+        getBookingRequest.bookingReturnIdsWithFilters("firstname","Jim","","",
+                        "","","","")
                 .then()
                 .statusCode(200)
                 .body("size()",greaterThan(0))
+                .body("bookingid",notNullValue())
+                .time(lessThan(5L), TimeUnit.SECONDS);
+
+    }
+    //Listar IDs de reservas utilizando o filtro lastname
+    @Test
+    @Severity(SeverityLevel.BLOCKER)
+    @Category({AllTests.class})
+    @DisplayName("Listar IDs de reservas utilizando o filtro lastname.")
+    public void validarListagemDeIdsComFiltroLastName(){
+
+        getBookingRequest.bookingReturnIdsWithFilters("lastname","Brown","","",
+                        "","","","")
+                .then()
+                .statusCode(200)
+                .body("size()",greaterThan(0))
+                .body("bookingid",notNullValue())
+                .time(lessThan(5L), TimeUnit.SECONDS);
+
+    }
+    //Listar IDs de reservas utilizando o filtro checkin
+    @Test
+    @Severity(SeverityLevel.BLOCKER)
+    @Category({AllTests.class})
+    @DisplayName("Listar IDs de reservas utilizando o filtro checkin.")
+    public void validarListagemDeIdsComFiltroCheckin(){
+
+        getBookingRequest.bookingReturnIdsWithFilters("checkin","2017-07-29","","",
+                        "","","","")
+                .then()
+                .statusCode(200)
+                .body("size()",greaterThan(0))
+                .body("bookingid",notNullValue())
+                .time(lessThan(5L), TimeUnit.SECONDS);
+
+    }
+    //Listar IDs de reservas utilizando o filtro checkout
+    @Test
+    @Severity(SeverityLevel.BLOCKER)
+    @Category({AllTests.class})
+    @DisplayName("Listar IDs de reservas utilizando o filtro checkout.")
+    public void validarListagemDeIdsComFiltroCheckout(){
+
+        getBookingRequest.bookingReturnIdsWithFilters("checkout","2018-04-29","","",
+                        "","","","")
+                .then()
+                .statusCode(200)
+                .body("size()",greaterThan(0))
+                .body("bookingid",notNullValue())
+                .time(lessThan(5L), TimeUnit.SECONDS);
+
+    }
+    //Listar IDs de reservas utilizando o filtro checkin and checkout
+    @Test
+    @Severity(SeverityLevel.BLOCKER)
+    @Category({AllTests.class})
+    @DisplayName("Listar IDs de reservas utilizando o filtro checkin e checkout.")
+    public void validarListagemDeIdsComFiltroCheckinECheckout(){
+
+        getBookingRequest.bookingReturnIdsWithFilters("checkin","2017-07-29","checkout","2018-04-29",
+                        "","","","")
+                .then()
+                .statusCode(200)
+                .body("size()",greaterThan(0))
+                .body("bookingid",notNullValue())
+                .time(lessThan(5L), TimeUnit.SECONDS);
+
+    }
+    //Listar IDs de reservas utilizando o filtro name, checkin and checkout date
+    @Test
+    @Severity(SeverityLevel.BLOCKER)
+    @Category({AllTests.class})
+    @DisplayName("Listar IDs de reservas utilizando o filtro checkin e checkout.")
+    public void validarListagemDeIdsComFiltroNomeECheckinECheckout(){
+
+        getBookingRequest.bookingReturnIdsWithFilters("firstname","Jim","checkin","2017-07-29",
+                        "checkout","2018-04-29","","")
+                .then()
+                .statusCode(200)
+                .body("size()",greaterThan(0))
+                .body("bookingid",notNullValue())
                 .time(lessThan(5L), TimeUnit.SECONDS);
 
     }
 
-    @Test
-    @Severity(SeverityLevel.BLOCKER)
-    @Category({AllTests.class})
-    @DisplayName("Listar IDs de reservas com filtro de data.")
-    public void validarListagemDeIdsDasReservasPorData(){
-
-        getBookingRequest.bookingReturnIds4Filters("firstname","Sally","lastname","Brown",
-                        "checkin","2014-03-13","checkout","2014-05-21")
-                .then()
-                .statusCode(200)
-                .body("size()",greaterThan(0))
-                .time(lessThan(5L), TimeUnit.SECONDS);
-
-    }
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
     @Category({AllTests.class})
     @DisplayName("Listar reserva por id.")
     public void validarBuscaDeReservasPorId(){
+        int bookingFirstId = getBookingRequest.bookingFirstId();
+        BookingPayloads bookingPayloads = new BookingPayloads();
 
-        getBookingRequest.bookingById()
+        getBookingRequest.bookingById(bookingFirstId)
                 .then()
                 .statusCode(200)
-                .body("size()",greaterThan(0))
+                .body("firstname",notNullValue())
+                .body("lastname",notNullValue())
+                .body("totalprice",notNullValue())
+                .body("depositpaid",notNullValue())
+                .body("bookingdates",notNullValue())
                 .time(lessThan(5L), TimeUnit.SECONDS);
 
     }
