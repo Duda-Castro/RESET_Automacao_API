@@ -5,6 +5,7 @@ import com.jayway.jsonpath.JsonPath;
 import io.restassured.response.Response;
 import org.json.JSONException;
 
+
 import static io.restassured.RestAssured.given;
 
 public class GetBookingRequest {
@@ -31,6 +32,7 @@ public class GetBookingRequest {
 
 
     }
+
 
     @Step("Retorna os IDs da listagem de reservas com filtro.")
     public Response bookingReturnIdsWithFilters(String filtro1, String valor1, String filtro2, String valor2,

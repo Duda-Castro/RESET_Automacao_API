@@ -1,6 +1,7 @@
 package br.com.restassuredapitest.testes.booking.testes;
 
 import br.com.restassuredapitest.base.BaseTest;
+import br.com.restassuredapitest.suites.AcceptanceCriticalTest;
 import br.com.restassuredapitest.suites.AllTests;
 import br.com.restassuredapitest.suites.SchemaTest;
 import br.com.restassuredapitest.testes.booking.requests.GetBookingRequest;
@@ -28,8 +29,8 @@ public class GetBookingTest extends BaseTest {
     //Listar IDs das reservas
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Category({AllTests.class})
-    @DisplayName("Listar IDs de reservas")
+    @Category({AllTests.class, AcceptanceCriticalTest.class})
+    @DisplayName("Listar IDs das reservas.")
     public void validarListagemDeIdsDasReservas(){
 
         getBookingRequest.bookingReturnIds()
@@ -43,7 +44,7 @@ public class GetBookingTest extends BaseTest {
     //Listar IDs de reservas utilizando o filtro firstname
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Category({AllTests.class})
+    @Category({AllTests.class,AcceptanceCriticalTest.class})
     @DisplayName("Listar IDs de reservas utilizando o filtro firstname.")
     public void validarListagemDeIdsComFiltroFirstName(){
 
@@ -59,7 +60,7 @@ public class GetBookingTest extends BaseTest {
     //Listar IDs de reservas utilizando o filtro lastname
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Category({AllTests.class})
+    @Category({AllTests.class,AcceptanceCriticalTest.class})
     @DisplayName("Listar IDs de reservas utilizando o filtro lastname.")
     public void validarListagemDeIdsComFiltroLastName(){
 
@@ -75,7 +76,7 @@ public class GetBookingTest extends BaseTest {
     //Listar IDs de reservas utilizando o filtro checkin
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Category({AllTests.class})
+    @Category({AllTests.class,AcceptanceCriticalTest.class})
     @DisplayName("Listar IDs de reservas utilizando o filtro checkin.")
     public void validarListagemDeIdsComFiltroCheckin(){
 
@@ -91,7 +92,7 @@ public class GetBookingTest extends BaseTest {
     //Listar IDs de reservas utilizando o filtro checkout
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Category({AllTests.class})
+    @Category({AllTests.class,AcceptanceCriticalTest.class})
     @DisplayName("Listar IDs de reservas utilizando o filtro checkout.")
     public void validarListagemDeIdsComFiltroCheckout(){
 
@@ -107,7 +108,7 @@ public class GetBookingTest extends BaseTest {
     //Listar IDs de reservas utilizando o filtro checkin and checkout
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Category({AllTests.class})
+    @Category({AllTests.class,AcceptanceCriticalTest.class})
     @DisplayName("Listar IDs de reservas utilizando o filtro checkin e checkout.")
     public void validarListagemDeIdsComFiltroCheckinECheckout(){
 
@@ -123,7 +124,7 @@ public class GetBookingTest extends BaseTest {
     //Listar IDs de reservas utilizando o filtro name, checkin and checkout date
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Category({AllTests.class})
+    @Category({AllTests.class,AcceptanceCriticalTest.class})
     @DisplayName("Listar IDs de reservas utilizando o filtro checkin e checkout.")
     public void validarListagemDeIdsComFiltroNomeECheckinECheckout(){
 
@@ -140,8 +141,8 @@ public class GetBookingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Category({AllTests.class})
-    @DisplayName("Listar reserva por id.")
+    @Category({AllTests.class, AcceptanceCriticalTest.class})
+    @DisplayName("Listar uma reserva específica.")
     public void validarBuscaDeReservasPorId(){
         int bookingFirstId = getBookingRequest.bookingFirstId();
         BookingPayloads bookingPayloads = new BookingPayloads();

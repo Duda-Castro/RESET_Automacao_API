@@ -9,7 +9,8 @@ import static io.restassured.RestAssured.given;
 
 public class PutBookingRequest {
     BookingPayloads bookingPayloads = new BookingPayloads();
-    @Step("Atualiza uma reserva específica com um token")
+
+    @Step("Alterar uma reserva usando o token.")
     public Response updateBookingToken(Integer id, String token,String firstname,String lastname,Number totalprice,Boolean depositpaid,
                                        String checkin,String checkout) throws JSONException {
 
@@ -27,5 +28,53 @@ public class PutBookingRequest {
 
     }
 
+
+    @Step("Alterar uma reserva usando o Basic auth.")
+    public Response updateBookingBasic(int id,String firstname,String lastname,Number totalprice,Boolean depositpaid,
+                                      String checkin,String checkout){
+
+        return given()
+                .header("Content-Type","application/json")
+                .header("Accept","application/json")
+                .header("Authorisation","Basic YWRtaW46cGFzc3dvcmQxMjM=")
+                .queryParam("id",id)
+                .when()
+                .log().all()
+                .body(bookingPayloads.payloadValidoBooking(firstname,lastname,totalprice,depositpaid,checkin,checkout).toString())
+                .put("booking/" + id);
+
+    }
+
+    @Step("Alterar uma reserva sem o Basic auth.")
+    public Response updateBookingNoBasic(int id,String firstname,String lastname,Number totalprice,Boolean depositpaid,
+                                      String checkin,String checkout){
+
+        return given()
+                .header("Content-Type","application/json")
+                .header("Accept","application/json")
+                .header("Authorisation"," ")
+                .queryParam("id",id)
+                .when()
+                .log().all()
+                .body(bookingPayloads.payloadValidoBooking(firstname,lastname,totalprice,depositpaid,checkin,checkout).toString())
+                .put("booking/" + id);
+
+    }
+
+    @Step("Alterar uma reserva quando o token enviado for inválido.")
+    public Response updateBookingWrongToken(int id,String firstname,String lastname,Number totalprice,Boolean depositpaid,
+                                         String checkin,String checkout){
+
+        return given()
+                .header("Content-Type","application/json")
+                .header("Accept","application/json")
+                .header("Cookie","wrongcookie123")
+                .queryParam("id",id)
+                .when()
+                .log().all()
+                .body(bookingPayloads.payloadValidoBooking(firstname,lastname,totalprice,depositpaid,checkin,checkout).toString())
+                .put("booking/" + id);
+
+    }
 
 }

@@ -4,11 +4,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class AuthPayloads {
-        public JSONObject jsonAuthLogin() throws JSONException {
+        public JSONObject jsonAuthLogin(String username, String password) throws JSONException {
             JSONObject payloadLogin = new JSONObject();
 
-            payloadLogin.put("username","admin");
-            payloadLogin.put("password","password123");
+            payloadLogin.put("username",username);//"admin"
+            payloadLogin.put("password",password);//"password123"
 
         return payloadLogin;
         }

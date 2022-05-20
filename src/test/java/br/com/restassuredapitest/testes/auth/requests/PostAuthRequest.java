@@ -13,20 +13,20 @@ public class PostAuthRequest {
     AuthPayloads authPayloads = new AuthPayloads();
 
     @Step("Retorna o token")
-    public Response tokenReturn() throws JSONException {
+    public Response tokenReturn(String username, String password) throws JSONException {
 
         return given()
                 .header("Content-Type", "Application/json")
                 .when()
-                .body(authPayloads.jsonAuthLogin().toString())
+                .body(authPayloads.jsonAuthLogin(username,password).toString())
                 .post("auth");
 
 
     }
     @Step("Busca o token")
-    public String getToken() throws JSONException {
+    public String getToken(String username, String password) throws JSONException {
 
-        return "token" + this.tokenReturn()
+        return "token" + this.tokenReturn(username,password)
                 .then()
                 .statusCode(200)
                 .extract()

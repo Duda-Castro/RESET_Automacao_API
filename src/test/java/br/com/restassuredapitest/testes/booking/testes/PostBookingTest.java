@@ -1,6 +1,7 @@
 package br.com.restassuredapitest.testes.booking.testes;
 
 import br.com.restassuredapitest.base.BaseTest;
+import br.com.restassuredapitest.suites.AcceptanceCriticalTest;
 import br.com.restassuredapitest.suites.AllTests;
 import br.com.restassuredapitest.suites.SchemaTest;
 import br.com.restassuredapitest.testes.booking.requests.PostBookingRequest;
@@ -27,8 +28,8 @@ public class PostBookingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Category({AllTests.class, SchemaTest.class})
-    @DisplayName("Cadastrar nova reserva.")
+    @Category({AllTests.class, SchemaTest.class, AcceptanceCriticalTest.class})
+    @DisplayName("Criar uma nova reserva.")
     public void validarCadastroDeNovaReserva(){
 
         postBookingRequest.bookingCreate("Jim","Brown",
