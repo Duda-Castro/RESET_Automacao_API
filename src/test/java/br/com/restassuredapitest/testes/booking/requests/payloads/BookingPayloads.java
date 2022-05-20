@@ -4,33 +4,25 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class BookingPayloads {
-        public static JSONObject payloadValidoBooking() throws JSONException {
+        public JSONObject payloadValidoBooking(String firstname,String lastname,Number totalprice,Boolean depositpaid,
+                                                      String checkin,String checkout) throws JSONException {
             JSONObject payload = new JSONObject();
             JSONObject bookingDates = new JSONObject();
 
 
-            bookingDates.put("checkin","2018-01-01");
-            bookingDates.put("checkout","2019-01-01");
+            bookingDates.put("checkin",checkin);
+            bookingDates.put("checkout",checkout);
 
-            payload.put("firstname","Ronaldo");
-            payload.put("lastname","Silva");
-            payload.put("totalprice",111);
-            payload.put("depositpaid",true);
+            payload.put("firstname",firstname);
+            payload.put("lastname",lastname);
+            payload.put("totalprice",totalprice);
+            payload.put("depositpaid",depositpaid);
             payload.put("bookingdates",bookingDates);
             payload.put("additionalneeds","breakfeast");
 
         return payload;
         }
 
-    public static JSONObject data() throws JSONException {
 
-        JSONObject bookingDates = new JSONObject();
-
-
-        bookingDates.put("checkin","2018-01-01");
-        bookingDates.put("checkout","2019-01-01");
-
-        return bookingDates;
-    }
 
 }

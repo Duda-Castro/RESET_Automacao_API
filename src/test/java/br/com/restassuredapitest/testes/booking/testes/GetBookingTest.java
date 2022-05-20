@@ -2,7 +2,7 @@ package br.com.restassuredapitest.testes.booking.testes;
 
 import br.com.restassuredapitest.base.BaseTest;
 import br.com.restassuredapitest.suites.AllTests;
-import br.com.restassuredapitest.suites.ContractTests;
+import br.com.restassuredapitest.suites.SchemaTest;
 import br.com.restassuredapitest.testes.booking.requests.GetBookingRequest;
 import br.com.restassuredapitest.testes.booking.requests.payloads.BookingPayloads;
 import br.com.restassuredapitest.utils.Utils;
@@ -10,7 +10,6 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.junit4.DisplayName;
-import br.com.restassuredapitest.testes.booking.requests.payloads.BookingPayloads;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -161,8 +160,8 @@ public class GetBookingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Category({ContractTests.class,AllTests.class})
-    @DisplayName("Garantir o schema do retorno da listagem de reservas")
+    @Category({SchemaTest.class,AllTests.class})
+    @DisplayName("Garantir o schema do retorno da listagem de reservas.")
     public void validaSchemaDaListagemDeReservas(){
         getBookingRequest.bookingReturnIds()
                 .then()
@@ -171,6 +170,35 @@ public class GetBookingTest extends BaseTest {
                 .time(lessThan(5L), TimeUnit.SECONDS);
 
     }
+
+    @Test
+    @Severity(SeverityLevel.BLOCKER)
+    @Category({SchemaTest.class,AllTests.class})
+    @DisplayName("Garantir o schema do retorno da listagem de reservas com filtro.")
+    public void validaSchemaDaListagemDeReservasComFiltro(){
+        getBookingRequest.bookingReturnIdsWithFilters("firstname","Jim","","",
+                        "","","","")
+                .then()
+                .statusCode(200)
+                .body(matchesJsonSchema(new File(Utils.getSchemaBasePath("booking","bookings"))))
+                .time(lessThan(5L), TimeUnit.SECONDS);
+
+    }
+
+    @Test
+    @Severity(SeverityLevel.BLOCKER)
+    @Category({SchemaTest.class,AllTests.class})
+    @DisplayName("Garantir o schema do retorno da reserva por id.")
+    public void validaSchemaDaListagemDeReservaPorId(){
+        getBookingRequest.bookingById(getBookingRequest.bookingFirstId())
+                .then()
+                .statusCode(200)
+                .body(matchesJsonSchema(new File(Utils.getSchemaBasePath("booking","getBookingById"))))
+                .time(lessThan(5L), TimeUnit.SECONDS);
+
+    }
+
+
 
 
 }

@@ -10,14 +10,16 @@ import static io.restassured.RestAssured.given;
 public class PutBookingRequest {
     BookingPayloads bookingPayloads = new BookingPayloads();
     @Step("Atualiza uma reserva específica com um token")
-    public Response updateBookingToken(Integer id, String token) throws JSONException {
+    public Response updateBookingToken(Integer id, String token,String firstname,String lastname,Number totalprice,Boolean depositpaid,
+                                       String checkin,String checkout) throws JSONException {
 
         return given()
                 .header("Content-Type","application/json")
                 .header("Accept","application/json")
                 .header("Cookie",token)
                 .when()
-                .body(bookingPayloads.payloadValidoBooking().toString())
+                .log().all()
+                .body(bookingPayloads.payloadValidoBooking(firstname,lastname,totalprice,depositpaid,checkin,checkout).toString())
                 .get("booking/" + id);
 
 

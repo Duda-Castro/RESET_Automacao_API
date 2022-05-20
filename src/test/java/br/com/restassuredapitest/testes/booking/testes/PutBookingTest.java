@@ -32,8 +32,10 @@ public class PutBookingTest extends BaseTest {
                         .path("[0].bookingid");
 
 
-        putBookingRequest.updateBookingToken(primeiroId, postAuthRequest.getToken())
+        putBookingRequest.updateBookingToken(primeiroId, postAuthRequest.getToken(),"Jim","Brown",
+                        111,true,"2018-01-01","2019-01-01")
                 .then()
+                .log().all()
                 .statusCode(200)
                 .body("size()",greaterThan(0));
     }

@@ -9,13 +9,15 @@ import static io.restassured.RestAssured.given;
 public class PostBookingRequest {
     BookingPayloads bookingPayloads = new BookingPayloads();
     @Step("Cria nova reserva.")
-    public Response bookingCreate(){
+    public Response bookingCreate(String firstname,String lastname,Number totalprice,Boolean depositpaid,
+                                  String checkin,String checkout){
 
         return given()
                 .header("Content-Type","application/json")
                 .header("Accept","application/json")
                 .when()
-                .body(bookingPayloads.payloadValidoBooking().toString())
+                .log().all()
+                .body(bookingPayloads.payloadValidoBooking(firstname,lastname,totalprice,depositpaid,checkin,checkout).toString())
                 .post("booking");
 
 

@@ -2,9 +2,7 @@ package br.com.restassuredapitest.testes.booking.testes;
 
 import br.com.restassuredapitest.base.BaseTest;
 import br.com.restassuredapitest.suites.AllTests;
-import br.com.restassuredapitest.suites.ContractTests;
 import br.com.restassuredapitest.suites.SchemaTest;
-import br.com.restassuredapitest.testes.booking.requests.GetBookingRequest;
 import br.com.restassuredapitest.testes.booking.requests.PostBookingRequest;
 import br.com.restassuredapitest.utils.Utils;
 import io.qameta.allure.Feature;
@@ -33,11 +31,28 @@ public class PostBookingTest extends BaseTest {
     @DisplayName("Cadastrar nova reserva.")
     public void validarCadastroDeNovaReserva(){
 
-        postBookingRequest.bookingCreate()
+        postBookingRequest.bookingCreate("Jim","Brown",
+                        111,true,"2018-01-01","2019-01-01")
                 .then()
+                .log().all()
                 .statusCode(200)
                 .body("size()",greaterThan(0))
                 .time(lessThan(5L), TimeUnit.SECONDS);
+
+    }
+
+    @Test
+    @Severity(SeverityLevel.BLOCKER)
+    @Category({SchemaTest.class,AllTests.class})
+    @DisplayName("Garantir o schema do retorno da postagem da reserva.")
+    public void validaSchemaDaPostagemDeReserva(){
+
+        postBookingRequest.bookingCreate("Jim","Brown",
+                        111,true,"2018-01-01","2019-01-01")
+                .then()
+                .statusCode(200)
+                .body(matchesJsonSchema(new File(Utils.getSchemaBasePath("booking","postBooking"))));
+
 
     }
 
