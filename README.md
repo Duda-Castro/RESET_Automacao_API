@@ -11,6 +11,5 @@ Bug(POST): Criação de reserva não solicita token.
 Bug(PUT): Alteração de reserva inexistente gera 403 forbiden e não 404 notfound.
 Bug(GET): Busca com filtro checkin está retornando apenas datas posteriores, ignorando o próprio dia informado no filtro(3).
 
-TAREFAS PENDENTES:
 
 
