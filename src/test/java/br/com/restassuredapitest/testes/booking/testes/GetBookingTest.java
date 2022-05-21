@@ -50,7 +50,7 @@ public class GetBookingTest extends BaseTest {
                 .then()
                 .statusCode(200)
                 .body("size()",greaterThan(0))
-                .body("firstname",notNullValue());
+                .body("bookingid",notNullValue());;
 
     }
     @Test
@@ -64,7 +64,7 @@ public class GetBookingTest extends BaseTest {
                 .then()
                 .statusCode(200)
                 .body("size()",greaterThan(0))
-                .body("lastname",notNullValue());
+                .body("bookingid",notNullValue());;
 
     }
     @Test
@@ -72,13 +72,14 @@ public class GetBookingTest extends BaseTest {
     @Category({AllTests.class,AcceptanceCriticalTest.class})
     @DisplayName("Listar IDs de reservas utilizando o filtro checkin.")
     public void validarListagemDeIdsComFiltroCheckin(){
-        postBookingRequest.bookingCreate("Jim","Brown",111,true,"2017-07-29","2018-04-29");
-        getBookingRequest.bookingReturnIdsWithFilters("checkin","2017-07-29","","",
+        postBookingRequest.bookingCreate("Jim","Brown",111,true,"2000-01-01","2001-01-01");
+        getBookingRequest.bookingReturnIdsWithFilters("checkin","1111-01-01","","",
                         "","","","")
                 .then()
+                .log().all()
                 .statusCode(200)
                 .body("size()",greaterThan(0))
-                .body("checkin",notNullValue());
+                .body("bookingid",notNullValue());;
 
     }
     @Test
@@ -87,13 +88,14 @@ public class GetBookingTest extends BaseTest {
     @DisplayName("Listar IDs de reservas utilizando o filtro checkout.")
     public void validarListagemDeIdsComFiltroCheckout(){
         postBookingRequest.bookingCreate("Jim","Brown",111,true,"2017-07-29","2018-04-29");
-        getBookingRequest.bookingReturnIdsWithFilters("checkout","2018-04-29","","",
+        getBookingRequest.bookingReturnIdsWithFilters("checkout","2222-01-01","","",
                         "","","","")
                 .then()
+                .log().all()
                 .statusCode(200)
                 .body("size()",greaterThan(0))
-                .body("checkout",notNullValue())
-        ;
+                .body("bookingid",notNullValue());
+
 
     }
     @Test
@@ -101,14 +103,14 @@ public class GetBookingTest extends BaseTest {
     @Category({AllTests.class,AcceptanceCriticalTest.class})
     @DisplayName("Listar IDs de reservas utilizando o filtro checkin e checkout.")
     public void validarListagemDeIdsComFiltroCheckinECheckout(){
-        postBookingRequest.bookingCreate("Jim","Brown",111,true,"2017-07-29","2018-04-29");
-        getBookingRequest.bookingReturnIdsWithFilters("checkin","2017-07-29","checkout","2018-04-29",
+        postBookingRequest.bookingCreate("Jim","Brown",111,true,"9798-07-29","9898-04-29");
+        getBookingRequest.bookingReturnIdsWithFilters("checkin","1111-01-01","checkout","2222-01-01",
                         "","","","")
                 .then()
+                .log().all()
                 .statusCode(200)
                 .body("size()",greaterThan(0))
-                .body("checkin",notNullValue())
-                .body("checkout",notNullValue());
+                .body("bookingid",notNullValue());
 
     }
     @Test
@@ -117,13 +119,12 @@ public class GetBookingTest extends BaseTest {
     @DisplayName("Listar IDs de reservas utilizando o filtro checkin e checkout.")
     public void validarListagemDeIdsComFiltroNomeECheckinECheckout(){
         postBookingRequest.bookingCreate("Jim","Brown",111,true,"2017-07-29","2018-04-29");
-        getBookingRequest.bookingReturnIdsWithFilters("firstname","Jim","checkin","2017-07-29",
-                        "checkout","2018-04-29","","")
+        getBookingRequest.bookingReturnIdsWithFilters("firstname","Jim","checkin","1111-01-01",
+                        "checkout","2222-01-01","","")
                 .then()
+                .log().all()
                 .statusCode(200)
-                .body("firstname",notNullValue())
-                .body("checkin",notNullValue())
-                .body("checkout",notNullValue());
+                .body("bookingid",notNullValue());
 
     }
 

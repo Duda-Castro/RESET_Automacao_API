@@ -17,7 +17,7 @@ public class DeleteBookingRequest {
         return given()
                 .when()
                 .queryParam("id",id)
-                .get("booking/"+id);
+                .delete("booking/"+id);
 
 
 
@@ -27,9 +27,9 @@ public class DeleteBookingRequest {
 
         return given()
                 .when()
-                .header("Cookie","token=" + postAuthRequest.getToken(username,password))
+                .header("Cookie",postAuthRequest.getToken(username,password))
                 .queryParam("id",id)
-                .get("booking/"+id);
+                .delete("booking/"+id);
 
 
 
@@ -41,7 +41,7 @@ public class DeleteBookingRequest {
                 .when()
                 .header("Authorisation","Basic YWRtaW46cGFzc3dvcmQxMjM=")
                 .queryParam("id",id)
-                .get("booking/"+id);
+                .delete("booking/"+id);
 
 
 

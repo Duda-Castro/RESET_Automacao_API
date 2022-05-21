@@ -29,8 +29,7 @@ public class PutBookingTest extends BaseTest {
     @DisplayName("Alterar uma reserva usando o token")
     public void validarAlteracaoDeUmaReservaUtilizandoToken() throws JSONException {
 
-
-        putBookingRequest.updateBookingToken(getBookingRequest.bookingFirstId(), postAuthRequest.getToken("admin","password123"),"alterando","nome",
+        putBookingRequest.updateBookingToken(postAuthRequest.getToken("admin","password123"), getBookingRequest.bookingFirstId(), "alterando","nome",
                         222,false,"2018-01-01","2019-01-01")
                 .then()
                 .statusCode(200)
@@ -70,7 +69,7 @@ public class PutBookingTest extends BaseTest {
     public void validarAlteracaoDeUmaReservaSemToken() throws JSONException {
 
 
-        putBookingRequest.updateBookingToken(getBookingRequest.bookingFirstId(), "","trocando","nome",
+        putBookingRequest.updateBookingToken(postAuthRequest.getToken("",""),getBookingRequest.bookingFirstId(),"trocando","nome",
                         111,true,"2018-01-01","2019-01-01")
                 .then()
                 .statusCode(403);
@@ -108,7 +107,7 @@ public class PutBookingTest extends BaseTest {
     @DisplayName("Alterar uma reserva que não existe.")
     public void validarAlteracaoDeReservaInexistente(){
 
-        putBookingRequest.updateBookingToken(-1, postAuthRequest.getToken("admin","password123"),"Jim","Brown",
+        putBookingRequest.updateBookingToken(postAuthRequest.getToken("admin","password123"),-1, "Jim","Brown",
                         111,true,"2018-01-01","2019-01-01")
                 .then()
                 .statusCode(404);

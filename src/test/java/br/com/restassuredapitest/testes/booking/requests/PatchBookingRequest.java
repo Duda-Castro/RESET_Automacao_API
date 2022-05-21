@@ -18,7 +18,7 @@ public class PatchBookingRequest {
         return given()
                 .header("Content-Type","application/json")
                 .header("Accept","application/json")
-                .header("Cookie","token=" + postAuthRequest.getToken(username,password))
+                .header("Cookie",postAuthRequest.getToken(username,password))
                 .queryParam("id",id)
                 .when()
                 .body(bookingPayloads.payloadParcial(firstname,lastname).toString())

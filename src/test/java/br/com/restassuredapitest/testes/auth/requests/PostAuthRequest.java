@@ -24,7 +24,7 @@ public class PostAuthRequest {
     @Step("Busca o token")
     public String getToken(String username, String password) throws JSONException {
 
-        return "token" + this.tokenReturn(username,password)
+        return "token=" + this.tokenReturn(username,password)
                 .then()
                 .statusCode(200)
                 .extract()

@@ -1,5 +1,7 @@
 package br.com.restassuredapitest.testes.booking.requests;
 
+import br.com.restassuredapitest.testes.auth.requests.PostAuthRequest;
+import br.com.restassuredapitest.testes.auth.testes.PostAuthTest;
 import br.com.restassuredapitest.testes.booking.requests.payloads.BookingPayloads;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
@@ -9,9 +11,9 @@ import static io.restassured.RestAssured.given;
 
 public class PutBookingRequest {
     BookingPayloads bookingPayloads = new BookingPayloads();
-
+    PostAuthRequest postAuthRequest = new PostAuthRequest();
     @Step("Alterar uma reserva usando o token.")
-    public Response updateBookingToken(Integer id, String token,String firstname,String lastname,Number totalprice,Boolean depositpaid,
+    public Response updateBookingToken(String token,Integer id,String firstname,String lastname,Number totalprice,Boolean depositpaid,
                                        String checkin,String checkout) throws JSONException {
 
         return given()
