@@ -1,0 +1,32 @@
+-------------------------------------------------------------------------------
+Test set: br.com.restassuredapitest.runners.AllTests
+-------------------------------------------------------------------------------
+Tests run: 27, Failures: 0, Errors: 4, Skipped: 0, Time elapsed: 46.242 s <<< FAILURE! - in br.com.restassuredapitest.runners.AllTests
+validarAlteracaoDeUmaReservaUtilizandoBasic(br.com.restassuredapitest.testes.booking.testes.PutBookingTest)  Time elapsed: 1.783 s  <<< ERROR!
+groovy.lang.GroovyRuntimeException: 
+could not access constructor: private java.lang.AssertionError(java.lang.String) with arguments: [1 expectation failed.
+Expected status code <200> but was <403>.
+] reason: java.lang.IllegalAccessException: class org.codehaus.groovy.reflection.CachedConstructor cannot access a member of class java.lang.AssertionError (in module java.base) with modifiers "private"
+	at br.com.restassuredapitest.testes.booking.testes.PutBookingTest.validarAlteracaoDeUmaReservaUtilizandoBasic(PutBookingTest.java:54)
+
+validarAlteracaoDeReservaInexistente(br.com.restassuredapitest.testes.booking.testes.PutBookingTest)  Time elapsed: 1.696 s  <<< ERROR!
+groovy.lang.GroovyRuntimeException: 
+could not access constructor: private java.lang.AssertionError(java.lang.String) with arguments: [1 expectation failed.
+Expected status code <404> but was <405>.
+] reason: java.lang.IllegalAccessException: class org.codehaus.groovy.reflection.CachedConstructor cannot access a member of class java.lang.AssertionError (in module java.base) with modifiers "private"
+	at br.com.restassuredapitest.testes.booking.testes.PutBookingTest.validarAlteracaoDeReservaInexistente(PutBookingTest.java:113)
+
+validarCadastroDeNovaReservaComInfoExtra(br.com.restassuredapitest.testes.booking.testes.PostBookingTest)  Time elapsed: 1.039 s  <<< ERROR!
+groovy.lang.GroovyRuntimeException: 
+could not access constructor: private java.lang.AssertionError(java.lang.String) with arguments: [1 expectation failed.
+Expected status code <500> but was <200>.
+] reason: java.lang.IllegalAccessException: class org.codehaus.groovy.reflection.CachedConstructor cannot access a member of class java.lang.AssertionError (in module java.base) with modifiers "private"
+	at br.com.restassuredapitest.testes.booking.testes.PostBookingTest.validarCadastroDeNovaReservaComInfoExtra(PostBookingTest.java:89)
+
+validarAtualizacaoParcialBasic(br.com.restassuredapitest.testes.booking.testes.PatchBookingTest)  Time elapsed: 1.746 s  <<< ERROR!
+groovy.lang.GroovyRuntimeException: 
+could not access constructor: private java.lang.AssertionError(java.lang.String) with arguments: [1 expectation failed.
+Expected status code <200> but was <403>.
+] reason: java.lang.IllegalAccessException: class org.codehaus.groovy.reflection.CachedConstructor cannot access a member of class java.lang.AssertionError (in module java.base) with modifiers "private"
+	at br.com.restassuredapitest.testes.booking.testes.PatchBookingTest.validarAtualizacaoParcialBasic(PatchBookingTest.java:56)
+

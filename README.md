@@ -8,8 +8,6 @@ esteja com erro.
 Bug(POST): Cadastro com payload contendo info extra é aceito.
 Bug(POST): Cadastro de reserva com datas no passado é aceito.
 Bug(POST): Criação de reserva não solicita token.
-Bug(PATCH): Atualização parcial com Patch retorna 403 mesmo com Basic.
-Bug(PUT): Método put não está permitindo alterações mesmo com autorização(3).
 Bug(PUT): Alteração de reserva inexistente gera 403 forbiden e não 404 notfound.
 Bug(GET): Busca com filtro checkin está retornando apenas datas posteriores, ignorando o próprio dia informado no filtro(3).
 

@@ -34,7 +34,7 @@ public class PatchBookingRequest {
         return given()
                 .header("Content-Type","application/json")
                 .header("Accept","application/json")
-                .header("Authorisation","Basic YWRtaW46cGFzc3dvcmQxMjM=")
+                .header("Authorization","Basic YWRtaW46cGFzc3dvcmQxMjM=")
                 .queryParam("id",id)
                 .when()
                 .body(bookingPayloads.payloadParcial(firstname,lastname).toString())

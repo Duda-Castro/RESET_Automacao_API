@@ -39,7 +39,7 @@ public class DeleteBookingRequest {
 
         return given()
                 .when()
-                .header("Authorisation","Basic YWRtaW46cGFzc3dvcmQxMjM=")
+                .header("Authorization","Basic YWRtaW46cGFzc3dvcmQxMjM=")
                 .queryParam("id",id)
                 .delete("booking/"+id);
 

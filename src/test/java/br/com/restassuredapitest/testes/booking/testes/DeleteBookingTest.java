@@ -38,7 +38,7 @@ public class DeleteBookingTest extends BaseTest {
 
         deleteBookingRequest.excluiReservaComCookie(getBookingRequest.bookingFirstId(),"admin","password123")
                 .then()
-                .statusCode(200);
+                .statusCode(201);
 
     }
 
@@ -50,7 +50,7 @@ public class DeleteBookingTest extends BaseTest {
 
         deleteBookingRequest.excluiReservaComAuthorisation(getBookingRequest.bookingFirstId())
                 .then()
-                .statusCode(200);
+                .statusCode(201);
 
     }
     @Test

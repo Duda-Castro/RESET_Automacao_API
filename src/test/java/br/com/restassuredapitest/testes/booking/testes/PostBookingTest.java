@@ -63,7 +63,6 @@ public class PostBookingTest extends BaseTest {
 
         postBookingRequest.bookingCreateInvalid()
                 .then()
-                .log().all()
                 .statusCode(500);
 
     }

@@ -49,14 +49,13 @@ public class PutBookingTest extends BaseTest {
 
 
         putBookingRequest.updateBookingBasic(getBookingRequest.bookingFirstId(),"alterando","nome",
-                        111,true,"2018-01-01","2019-01-01")
+                        777,false,"2018-01-01","2019-01-01")
                 .then()
                 .statusCode(200)
                 .body("size()",greaterThan(0))
-                .body("size()",greaterThan(0))
                 .body("firstname",equalTo("alterando"))
                 .body("lastname",equalTo("nome"))
-                .body("totalprice",equalTo(222))
+                .body("totalprice",equalTo(777))
                 .body("depositpaid",equalTo(false))
                 .body("bookingdates.checkin",equalTo("2018-01-01"))
                 .body("bookingdates.checkout",equalTo("2019-01-01"));

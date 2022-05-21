@@ -122,7 +122,6 @@ public class GetBookingTest extends BaseTest {
         getBookingRequest.bookingReturnIdsWithFilters("firstname","Jim","checkin","1111-01-01",
                         "checkout","2222-01-01","","")
                 .then()
-                .log().all()
                 .statusCode(200)
                 .body("bookingid",notNullValue());
 
