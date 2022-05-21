@@ -2,7 +2,6 @@ package br.com.restassuredapitest.testes.auth.testes;
 
 import br.com.restassuredapitest.base.BaseTest;
 import br.com.restassuredapitest.suites.AllTests;
-import br.com.restassuredapitest.suites.AcceptanceCriticalTest;
 import br.com.restassuredapitest.testes.auth.requests.PostAuthRequest;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;

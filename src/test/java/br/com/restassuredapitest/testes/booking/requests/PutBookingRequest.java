@@ -21,7 +21,7 @@ public class PutBookingRequest {
                 .when()
                 .log().all()
                 .body(bookingPayloads.payloadValidoBooking(firstname,lastname,totalprice,depositpaid,checkin,checkout).toString())
-                .get("booking/" + id);
+                .put("booking/" + id);
 
 
 

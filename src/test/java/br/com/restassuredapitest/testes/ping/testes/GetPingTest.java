@@ -3,7 +3,6 @@ package br.com.restassuredapitest.testes.ping.testes;
 import br.com.restassuredapitest.base.BaseTest;
 import br.com.restassuredapitest.suites.AllTests;
 import br.com.restassuredapitest.suites.HealthCheck;
-import br.com.restassuredapitest.testes.booking.requests.GetBookingRequest;
 import br.com.restassuredapitest.testes.ping.requests.GetPingRequest;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
@@ -14,7 +13,6 @@ import org.junit.experimental.categories.Category;
 
 import java.util.concurrent.TimeUnit;
 
-import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.lessThan;
 
 @Feature("Feature de api online")
@@ -31,8 +29,7 @@ public class GetPingTest extends BaseTest {
 
         getPingRequest.pingReturnApi()
                 .then()
-                .statusCode(201)
-                .time(lessThan(5L), TimeUnit.SECONDS);
+                .statusCode(201);
 
     }
 

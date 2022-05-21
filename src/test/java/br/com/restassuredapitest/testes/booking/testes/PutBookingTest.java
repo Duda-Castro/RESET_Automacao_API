@@ -1,10 +1,7 @@
 package br.com.restassuredapitest.testes.booking.testes;
 
 import br.com.restassuredapitest.base.BaseTest;
-import br.com.restassuredapitest.suites.AcceptanceCriticalTest;
-import br.com.restassuredapitest.suites.AllTests;
-import br.com.restassuredapitest.suites.SchemaTest;
-import br.com.restassuredapitest.suites.SecurityTests;
+import br.com.restassuredapitest.suites.*;
 import br.com.restassuredapitest.testes.auth.requests.PostAuthRequest;
 import br.com.restassuredapitest.testes.booking.requests.GetBookingRequest;
 import br.com.restassuredapitest.testes.booking.requests.PutBookingRequest;
@@ -16,7 +13,10 @@ import org.json.JSONException;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
-import static org.hamcrest.Matchers.greaterThan;
+import java.util.concurrent.TimeUnit;
+
+import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
 
 @Feature("Feature de atualização da ação de reservas")
 public class PutBookingTest extends BaseTest {
@@ -30,12 +30,17 @@ public class PutBookingTest extends BaseTest {
     public void validarAlteracaoDeUmaReservaUtilizandoToken() throws JSONException {
 
 
-        putBookingRequest.updateBookingToken(getBookingRequest.bookingFirstId(), postAuthRequest.getToken("admin","password123"),"Jim","Brown",
-                        111,true,"2018-01-01","2019-01-01")
+        putBookingRequest.updateBookingToken(getBookingRequest.bookingFirstId(), postAuthRequest.getToken("admin","password123"),"alterando","nome",
+                        222,false,"2018-01-01","2019-01-01")
                 .then()
-                .log().all()
                 .statusCode(200)
-                .body("size()",greaterThan(0));
+                .body("size()",greaterThan(0))
+                .body("firstname",equalTo("alterando"))
+                .body("lastname",equalTo("nome"))
+                .body("totalprice",equalTo(222))
+                .body("depositpaid",equalTo(false))
+                .body("bookingdates.checkin",equalTo("2018-01-01"))
+                .body("bookingdates.checkout",equalTo("2019-01-01"));
     }
     @Test
     @Severity(SeverityLevel.NORMAL)
@@ -44,12 +49,18 @@ public class PutBookingTest extends BaseTest {
     public void validarAlteracaoDeUmaReservaUtilizandoBasic() throws JSONException {
 
 
-        putBookingRequest.updateBookingBasic(getBookingRequest.bookingFirstId(),"Jim","Brown",
+        putBookingRequest.updateBookingBasic(getBookingRequest.bookingFirstId(),"alterando","nome",
                         111,true,"2018-01-01","2019-01-01")
                 .then()
-                .log().all()
                 .statusCode(200)
-                .body("size()",greaterThan(0));
+                .body("size()",greaterThan(0))
+                .body("size()",greaterThan(0))
+                .body("firstname",equalTo("alterando"))
+                .body("lastname",equalTo("nome"))
+                .body("totalprice",equalTo(222))
+                .body("depositpaid",equalTo(false))
+                .body("bookingdates.checkin",equalTo("2018-01-01"))
+                .body("bookingdates.checkout",equalTo("2019-01-01"));
     }
 
     @Test
@@ -59,10 +70,9 @@ public class PutBookingTest extends BaseTest {
     public void validarAlteracaoDeUmaReservaSemToken() throws JSONException {
 
 
-        putBookingRequest.updateBookingToken(getBookingRequest.bookingFirstId(), "","Jim","Brown",
+        putBookingRequest.updateBookingToken(getBookingRequest.bookingFirstId(), "","trocando","nome",
                         111,true,"2018-01-01","2019-01-01")
                 .then()
-                .log().all()
                 .statusCode(403);
     }
 
@@ -73,10 +83,9 @@ public class PutBookingTest extends BaseTest {
     public void validarAlteracaoDeUmaReservaSemBasic() throws JSONException {
 
 
-        putBookingRequest.updateBookingNoBasic(getBookingRequest.bookingFirstId(),"Jim","Brown",
+        putBookingRequest.updateBookingNoBasic(getBookingRequest.bookingFirstId(),"trocando","nome",
                         111,true,"2018-01-01","2019-01-01")
                 .then()
-                .log().all()
                 .statusCode(403);
     }
 
@@ -87,11 +96,22 @@ public class PutBookingTest extends BaseTest {
     public void validarAlteracaoDeUmaReservaComTokenInvalido() throws JSONException {
 
 
-        putBookingRequest.updateBookingWrongToken(getBookingRequest.bookingFirstId(),"Jim","Brown",
+        putBookingRequest.updateBookingWrongToken(getBookingRequest.bookingFirstId(),"trocando","nome",
                         111,true,"2018-01-01","2019-01-01")
                 .then()
-                .log().all()
                 .statusCode(403);
+    }
+
+    @Test
+    @Severity(SeverityLevel.BLOCKER)
+    @Category({AllTests.class, AcceptanceExceptionTest.class})
+    @DisplayName("Alterar uma reserva que não existe.")
+    public void validarAlteracaoDeReservaInexistente(){
+
+        putBookingRequest.updateBookingToken(-1, postAuthRequest.getToken("admin","password123"),"Jim","Brown",
+                        111,true,"2018-01-01","2019-01-01")
+                .then()
+                .statusCode(404);
     }
 }
 
