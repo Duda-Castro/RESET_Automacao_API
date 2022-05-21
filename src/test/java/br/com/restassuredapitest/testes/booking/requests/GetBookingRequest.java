@@ -1,7 +1,6 @@
 package br.com.restassuredapitest.testes.booking.requests;
 
 import io.qameta.allure.Step;
-import com.jayway.jsonpath.JsonPath;
 import io.restassured.response.Response;
 import org.json.JSONException;
 
