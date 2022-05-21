@@ -21,7 +21,7 @@ public class DeleteBookingTest extends BaseTest {
     @Test
     @Severity(SeverityLevel.BLOCKER)
     @Category({AllTests.class, SecurityTests.class})
-    @DisplayName("Excluir uma reserva sem autorização")
+    @DisplayName("Não permitir a exclusão de uma reserva sem autorização.")
     public void validarExclusaoDeReservaSemHeader(){
 
         deleteBookingRequest.excluiReservaSemHeader(getBookingRequest.bookingFirstId())
@@ -31,9 +31,9 @@ public class DeleteBookingTest extends BaseTest {
     }
 
     @Test
-    @Severity(SeverityLevel.BLOCKER)
+    @Severity(SeverityLevel.CRITICAL)
     @Category({AllTests.class, AcceptanceCriticalTest.class})
-    @DisplayName("Excluir um reserva com sucesso token.")
+    @DisplayName("Excluir um reserva com sucesso usando token.")
     public void validarExclusaoDeReservaComToken(){
 
         deleteBookingRequest.excluiReservaComCookie(getBookingRequest.bookingFirstId(),"admin","password123")
@@ -43,9 +43,9 @@ public class DeleteBookingTest extends BaseTest {
     }
 
     @Test
-    @Severity(SeverityLevel.BLOCKER)
+    @Severity(SeverityLevel.CRITICAL)
     @Category({AllTests.class, AcceptanceCriticalTest.class})
-    @DisplayName("Excluir um reserva com sucesso basic.")
+    @DisplayName("Excluir um reserva com sucesso usando basic.")
     public void validarExclusaoDeReservaComBasic(){
 
         deleteBookingRequest.excluiReservaComAuthorisation(getBookingRequest.bookingFirstId())
@@ -54,9 +54,9 @@ public class DeleteBookingTest extends BaseTest {
 
     }
     @Test
-    @Severity(SeverityLevel.BLOCKER)
+    @Severity(SeverityLevel.NORMAL)
     @Category({AllTests.class, AcceptanceExceptionTest.class})
-    @DisplayName("Tentar excluir um reserva que não existe")
+    @DisplayName("Não permitir excluir um reserva que não existe")
     public void validarExclusaoDeReservaInexistente(){
 
         deleteBookingRequest.excluiReservaComCookie( -1,"admin","password123")

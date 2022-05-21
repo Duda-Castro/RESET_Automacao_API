@@ -16,9 +16,6 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 import java.io.File;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
-
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchema;
 import static org.hamcrest.Matchers.*;
 
@@ -31,7 +28,7 @@ public class PostBookingTest extends BaseTest {
     @Test
     @Severity(SeverityLevel.BLOCKER)
     @Category({AllTests.class, AcceptanceCriticalTest.class})
-    @DisplayName("Criar uma nova reserva.")
+    @DisplayName("Criar uma nova reserva com sucesso.")
     public void validarCadastroDeNovaReserva(){
 
         String firstname = new Faker().lordOfTheRings().character();
@@ -58,7 +55,7 @@ public class PostBookingTest extends BaseTest {
     @Test
     @Severity(SeverityLevel.BLOCKER)
     @Category({AllTests.class, AcceptanceExceptionTest.class})
-    @DisplayName("Fazer criação de reserva com payload inválido.")
+    @DisplayName("Falhar ao fazer a criação de reserva com payload inválido.")
     public void validarCadastroDeNovaReservaComPayloadInvalido(){
 
         postBookingRequest.bookingCreateInvalid()
@@ -70,7 +67,7 @@ public class PostBookingTest extends BaseTest {
     @Test
     @Severity(SeverityLevel.BLOCKER)
     @Category({AllTests.class, AcceptanceExceptionTest.class})
-    @DisplayName("Criar uma reserva enviando mais parâmetros no payload.")
+    @DisplayName("Falhar ao fazer uma reserva enviando mais parâmetros no payload.")
     public void validarCadastroDeNovaReservaComInfoExtra(){
         String firstname = new Faker().lordOfTheRings().character();
         String lastname = "The Mighty";
@@ -102,7 +99,7 @@ public class PostBookingTest extends BaseTest {
     }
 
     @Test
-    @Severity(SeverityLevel.BLOCKER)
+    @Severity(SeverityLevel.NORMAL)
     @Category({AllTests.class, AcceptanceExceptionTest.class})
     @DisplayName("Validar a criação de mais de uma reserva em sequência.")
     public void validarCadastroDeDuasNovasReservas(){

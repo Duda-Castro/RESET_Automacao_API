@@ -9,6 +9,7 @@ import br.com.restassuredapitest.testes.booking.requests.GetBookingRequest;
 import br.com.restassuredapitest.testes.booking.requests.PatchBookingRequest;
 import br.com.restassuredapitest.testes.booking.requests.PostBookingRequest;
 import br.com.restassuredapitest.utils.Utils;
+import com.github.javafaker.Faker;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
@@ -31,32 +32,34 @@ public class PatchBookingTest extends BaseTest {
     @Test
     @Severity(SeverityLevel.BLOCKER)
     @Category({AllTests.class, AcceptanceCriticalTest.class})
-    @DisplayName("Fazer atualização parcial.")
+    @DisplayName("Fazer atualização parcial usando token.")
     public void validarAtualizacaoParcial(){
+        String nomeTrocado = new Faker().elderScrolls().firstName();
+        String sobrenomeTrocado = new Faker().elderScrolls().lastName();
 
         patchBookingRequest.bookingAlterParcialInfo(getBookingRequest.bookingFirstId(),"admin","password123",
-                        "trocando","onome")
+                        nomeTrocado,sobrenomeTrocado)
                 .then()
                 .statusCode(200)
-                .body("size()",greaterThan(0))
-                .body("firstname",equalTo("trocando"))
-                .body("lastname",equalTo("onome"));
+                .body("firstname",equalTo(nomeTrocado))
+                .body("lastname",equalTo(sobrenomeTrocado));
 
     }
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
     @Category({AllTests.class, AcceptanceCriticalTest.class})
-    @DisplayName("Fazer atualização parcial.")
+    @DisplayName("Fazer atualização parcial usando basic.")
     public void validarAtualizacaoParcialBasic(){
-
+        String nomeTrocado = new Faker().elderScrolls().firstName();
+        String sobrenomeTrocado = new Faker().elderScrolls().lastName();
         patchBookingRequest.bookingAlterParcialInfoBasic(getBookingRequest.bookingFirstId(),
-                        "trocando","onome")
+                        nomeTrocado,sobrenomeTrocado)
                 .then()
                 .statusCode(200)
                 .body("size()",greaterThan(0))
-                .body("firstname",equalTo("trocando"))
-                .body("lastname",equalTo("onome"));
+                .body("firstname",equalTo(nomeTrocado))
+                .body("lastname",equalTo(sobrenomeTrocado));
 
     }
 

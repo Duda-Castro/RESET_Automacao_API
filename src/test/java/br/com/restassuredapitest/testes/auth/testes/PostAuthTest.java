@@ -30,8 +30,7 @@ public class PostAuthTest extends BaseTest {
         postAuthRequest.tokenReturn("admin","password123")
                 .then()
                 .statusCode(200)
-                .body("token",notNullValue())
-                .time(lessThan(5L), TimeUnit.SECONDS);
+                .body("token",notNullValue());
 
     }
 

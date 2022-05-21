@@ -16,7 +16,6 @@ public class PostBookingRequest {
                 .header("Content-Type","application/json")
                 .header("Accept","application/json")
                 .when()
-                .log().all()
                 .body(bookingPayloads.payloadValidoBooking(firstname,lastname,totalprice,depositpaid,checkin,checkout).toString())
                 .post("booking");
 
@@ -25,7 +24,7 @@ public class PostBookingRequest {
 
     }
 
-    @Step("Cria nova reserva.")
+    @Step("Cria nova reserva com informação extra.")
     public Response bookingCreateInfoExtra(String firstname,String lastname,Number totalprice,Boolean depositpaid,
                                          String checkin,String checkout, int peso, double altura,
                                          String signo, String pet){
@@ -59,5 +58,17 @@ public class PostBookingRequest {
 
 
     }
+
+    @Step("Cria nova reserva e retorna id.")
+        public int getIdbookingCreate(String firstname,String lastname,Number totalprice,Boolean depositpaid,
+                                      String checkin,String checkout){
+
+            return bookingCreate(firstname,lastname,totalprice,depositpaid,
+                            checkin,checkout)
+                    .then()
+                    .statusCode(200)
+                    .extract()
+                    .path("bookingid");
+        }
     }
 

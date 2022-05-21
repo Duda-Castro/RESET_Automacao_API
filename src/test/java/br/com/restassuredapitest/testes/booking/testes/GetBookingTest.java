@@ -40,90 +40,90 @@ public class GetBookingTest extends BaseTest {
     }
 
     @Test
-    @Severity(SeverityLevel.BLOCKER)
+    @Severity(SeverityLevel.NORMAL)
     @Category({AllTests.class,AcceptanceCriticalTest.class})
     @DisplayName("Listar IDs de reservas utilizando o filtro firstname.")
     public void validarListagemDeIdsComFiltroFirstName(){
-        postBookingRequest.bookingCreate("Jim","Brown",111,true,"2017-07-29","2018-04-29");
+       int id = postBookingRequest.getIdbookingCreate("Jim","Brown",111,true,"3159-07-29","3159-08-29");
         getBookingRequest.bookingReturnIdsWithFilters("firstname","Jim","","",
                         "","","","")
                 .then()
                 .statusCode(200)
                 .body("size()",greaterThan(0))
-                .body("bookingid",notNullValue());;
+                .body("bookingid",hasItem(id));;
 
     }
     @Test
-    @Severity(SeverityLevel.BLOCKER)
+    @Severity(SeverityLevel.NORMAL)
     @Category({AllTests.class,AcceptanceCriticalTest.class})
     @DisplayName("Listar IDs de reservas utilizando o filtro lastname.")
     public void validarListagemDeIdsComFiltroLastName(){
-        postBookingRequest.bookingCreate("Jim","Brown",111,true,"2017-07-29","2018-04-29");
+        int id = postBookingRequest.getIdbookingCreate("Jim","Brown",111,true,"3159-07-29","3159-08-29");
         getBookingRequest.bookingReturnIdsWithFilters("lastname","Brown","","",
                         "","","","")
                 .then()
                 .statusCode(200)
                 .body("size()",greaterThan(0))
-                .body("bookingid",notNullValue());;
+                .body("bookingid",hasItem(id));
 
     }
     @Test
-    @Severity(SeverityLevel.BLOCKER)
+    @Severity(SeverityLevel.NORMAL)
     @Category({AllTests.class,AcceptanceCriticalTest.class})
     @DisplayName("Listar IDs de reservas utilizando o filtro checkin.")
     public void validarListagemDeIdsComFiltroCheckin(){
-        postBookingRequest.bookingCreate("Jim","Brown",111,true,"2000-01-01","2001-01-01");
-        getBookingRequest.bookingReturnIdsWithFilters("checkin","1111-01-01","","",
+        int id = postBookingRequest.getIdbookingCreate("Jim","Brown",111,true,"3159-07-29","3159-08-29");
+        getBookingRequest.bookingReturnIdsWithFilters("checkin","3159-07-29","","",
                         "","","","")
                 .then()
                 .log().all()
                 .statusCode(200)
                 .body("size()",greaterThan(0))
-                .body("bookingid",notNullValue());;
+                .body("bookingid",hasItem(id));
 
     }
     @Test
-    @Severity(SeverityLevel.BLOCKER)
+    @Severity(SeverityLevel.NORMAL)
     @Category({AllTests.class,AcceptanceCriticalTest.class})
     @DisplayName("Listar IDs de reservas utilizando o filtro checkout.")
     public void validarListagemDeIdsComFiltroCheckout(){
-        postBookingRequest.bookingCreate("Jim","Brown",111,true,"2017-07-29","2018-04-29");
-        getBookingRequest.bookingReturnIdsWithFilters("checkout","2222-01-01","","",
+        int id = postBookingRequest.getIdbookingCreate("Jim","Brown",111,true,"3159-07-29","3159-08-29");
+        getBookingRequest.bookingReturnIdsWithFilters("checkout","3159-08-29","","",
                         "","","","")
                 .then()
                 .log().all()
                 .statusCode(200)
                 .body("size()",greaterThan(0))
-                .body("bookingid",notNullValue());
+                .body("bookingid",hasItem(id));
 
 
     }
     @Test
-    @Severity(SeverityLevel.BLOCKER)
+    @Severity(SeverityLevel.NORMAL)
     @Category({AllTests.class,AcceptanceCriticalTest.class})
-    @DisplayName("Listar IDs de reservas utilizando o filtro checkin e checkout.")
+    @DisplayName("Listar IDs de reservas utilizando os filtros checkin e checkout.")
     public void validarListagemDeIdsComFiltroCheckinECheckout(){
-        postBookingRequest.bookingCreate("Jim","Brown",111,true,"9798-07-29","9898-04-29");
-        getBookingRequest.bookingReturnIdsWithFilters("checkin","1111-01-01","checkout","2222-01-01",
+        int id = postBookingRequest.getIdbookingCreate("Jim","Brown",111,true,"3159-07-29","3159-08-29");
+        getBookingRequest.bookingReturnIdsWithFilters("checkin","3159-07-29","checkout","3159-08-29",
                         "","","","")
                 .then()
                 .log().all()
                 .statusCode(200)
                 .body("size()",greaterThan(0))
-                .body("bookingid",notNullValue());
+                .body("bookingid",hasItem(id));
 
     }
     @Test
-    @Severity(SeverityLevel.BLOCKER)
+    @Severity(SeverityLevel.NORMAL)
     @Category({AllTests.class,AcceptanceCriticalTest.class})
-    @DisplayName("Listar IDs de reservas utilizando o filtro checkin e checkout.")
+    @DisplayName("Listar IDs de reservas utilizando os filtros firstname, checkin e checkout.")
     public void validarListagemDeIdsComFiltroNomeECheckinECheckout(){
-        postBookingRequest.bookingCreate("Jim","Brown",111,true,"2017-07-29","2018-04-29");
-        getBookingRequest.bookingReturnIdsWithFilters("firstname","Jim","checkin","1111-01-01",
-                        "checkout","2222-01-01","","")
+        int id = postBookingRequest.getIdbookingCreate("Jim","Brown",111,true,"3159-07-29","3159-08-29");
+        getBookingRequest.bookingReturnIdsWithFilters("firstname","Jim","checkin","3159-07-29",
+                        "checkout","3159-08-29","","")
                 .then()
                 .statusCode(200)
-                .body("bookingid",notNullValue());
+                .body("bookingid",hasItem(id));
 
     }
 
@@ -133,16 +133,26 @@ public class GetBookingTest extends BaseTest {
     @Category({AllTests.class, AcceptanceCriticalTest.class})
     @DisplayName("Listar uma reserva específica.")
     public void validarBuscaDeReservasPorId(){
-        int bookingFirstId = getBookingRequest.bookingFirstId();
+        String nameValue = "Jim";
+        String lastnameValue = "Brown";
+        int totalprice = 111;
+        Boolean depositpaid = true;
+        String checkin = "3159-07-29";
+        String checkout = "3159-08-29";
 
-        getBookingRequest.bookingById(bookingFirstId)
+        int id = postBookingRequest.getIdbookingCreate(nameValue,lastnameValue,totalprice,depositpaid,checkin,checkout);
+
+
+        getBookingRequest.bookingById(id)
                 .then()
+                .log().all()
                 .statusCode(200)
-                .body("firstname",notNullValue())
-                .body("lastname",notNullValue())
-                .body("totalprice",notNullValue())
-                .body("depositpaid",notNullValue())
-                .body("bookingdates",notNullValue());
+                .body("firstname",equalTo(nameValue))
+                .body("lastname",equalTo(lastnameValue))
+                .body("totalprice",equalTo(totalprice))
+                .body("depositpaid",equalTo(depositpaid))
+                .body("bookingdates.checkin",equalTo(checkin))
+                .body("bookingdates.checkout",equalTo(checkout));
 
     }
 

@@ -26,8 +26,8 @@ public class DeleteBookingRequest {
     public Response excluiReservaComCookie(int id,String username,String password){
 
         return given()
-                .when()
                 .header("Cookie",postAuthRequest.getToken(username,password))
+                .when()
                 .queryParam("id",id)
                 .delete("booking/"+id);
 
@@ -38,8 +38,8 @@ public class DeleteBookingRequest {
     public Response excluiReservaComAuthorisation(int id){
 
         return given()
-                .when()
                 .header("Authorization","Basic YWRtaW46cGFzc3dvcmQxMjM=")
+                .when()
                 .queryParam("id",id)
                 .delete("booking/"+id);
 
