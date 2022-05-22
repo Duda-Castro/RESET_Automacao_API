@@ -111,6 +111,4 @@ pois ao usar o Postman o .header() é automaticamente gerado com o termo correto
 
 
 
-
-
->>>>>>> 8849370677b1a7e533ac671a05b8a558ba30f678
+  
