@@ -14,13 +14,10 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.junit4.DisplayName;
+import org.apache.http.HttpStatus;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
-import java.io.File;
-import java.util.concurrent.TimeUnit;
-
-import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchema;
 import static org.hamcrest.Matchers.*;
 
 @Feature("Feature de atualização parcial de reservas")
@@ -40,7 +37,7 @@ public class PatchBookingTest extends BaseTest {
         patchBookingRequest.bookingAlterParcialInfo(getBookingRequest.bookingFirstId(),"admin","password123",
                         nomeTrocado,sobrenomeTrocado)
                 .then()
-                .statusCode(200)
+                .statusCode(HttpStatus.SC_OK)
                 .body("firstname",equalTo(nomeTrocado))
                 .body("lastname",equalTo(sobrenomeTrocado));
 
@@ -56,7 +53,7 @@ public class PatchBookingTest extends BaseTest {
         patchBookingRequest.bookingAlterParcialInfoBasic(getBookingRequest.bookingFirstId(),
                         nomeTrocado,sobrenomeTrocado)
                 .then()
-                .statusCode(200)
+                .statusCode(HttpStatus.SC_OK)
                 .body("size()",greaterThan(0))
                 .body("firstname",equalTo(nomeTrocado))
                 .body("lastname",equalTo(sobrenomeTrocado));

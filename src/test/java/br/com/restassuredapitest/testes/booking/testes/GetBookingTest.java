@@ -12,6 +12,7 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.junit4.DisplayName;
+import org.apache.http.HttpStatus;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -33,8 +34,7 @@ public class GetBookingTest extends BaseTest {
 
         getBookingRequest.bookingReturnIds()
                 .then()
-                .statusCode(200)
-                .body("size()",greaterThan(0))
+                .statusCode(HttpStatus.SC_OK)
                 .body("bookingid",notNullValue());
 
     }
@@ -48,9 +48,8 @@ public class GetBookingTest extends BaseTest {
         getBookingRequest.bookingReturnIdsWithFilters("firstname","Jim","","",
                         "","","","")
                 .then()
-                .statusCode(200)
-                .body("size()",greaterThan(0))
-                .body("bookingid",hasItem(id));;
+                .statusCode(HttpStatus.SC_OK)
+                .body("bookingid",hasItem(id));
 
     }
     @Test
@@ -62,9 +61,8 @@ public class GetBookingTest extends BaseTest {
         getBookingRequest.bookingReturnIdsWithFilters("lastname","Brown","","",
                         "","","","")
                 .then()
-                .statusCode(200)
-                .body("size()",greaterThan(0))
-                .body("bookingid",hasItem(id));
+                .statusCode(HttpStatus.SC_OK)
+                .body("bookingid",hasItems(id));
 
     }
     @Test
@@ -76,10 +74,8 @@ public class GetBookingTest extends BaseTest {
         getBookingRequest.bookingReturnIdsWithFilters("checkin","3159-07-29","","",
                         "","","","")
                 .then()
-                .log().all()
-                .statusCode(200)
-                .body("size()",greaterThan(0))
-                .body("bookingid",hasItem(id));
+                .statusCode(HttpStatus.SC_OK)
+                .body("bookingid",hasItems(id));
 
     }
     @Test
@@ -91,10 +87,8 @@ public class GetBookingTest extends BaseTest {
         getBookingRequest.bookingReturnIdsWithFilters("checkout","3159-08-29","","",
                         "","","","")
                 .then()
-                .log().all()
-                .statusCode(200)
-                .body("size()",greaterThan(0))
-                .body("bookingid",hasItem(id));
+                .body("bookingid",hasItems(id))
+                .statusCode(HttpStatus.SC_OK);
 
 
     }
@@ -107,9 +101,9 @@ public class GetBookingTest extends BaseTest {
         getBookingRequest.bookingReturnIdsWithFilters("checkin","3159-07-29","checkout","3159-08-29",
                         "","","","")
                 .then()
-                .statusCode(200)
-                .body("size()",greaterThan(0))
-                .body("bookingid",hasItem(id));
+                .statusCode(HttpStatus.SC_OK)
+                .body("bookingid",hasItems(id));
+
 
     }
     @Test
@@ -121,8 +115,8 @@ public class GetBookingTest extends BaseTest {
         getBookingRequest.bookingReturnIdsWithFilters("firstname","Jim","checkin","3159-07-29",
                         "checkout","3159-08-29","","")
                 .then()
-                .statusCode(200)
-                .body("bookingid",hasItem(id));
+                .statusCode(HttpStatus.SC_OK)
+                .body("bookingid",hasItems(id));
 
     }
 
@@ -144,8 +138,7 @@ public class GetBookingTest extends BaseTest {
 
         getBookingRequest.bookingById(id)
                 .then()
-                .log().all()
-                .statusCode(200)
+                .statusCode(HttpStatus.SC_OK)
                 .body("firstname",equalTo(nameValue))
                 .body("lastname",equalTo(lastnameValue))
                 .body("totalprice",equalTo(totalprice))
@@ -162,7 +155,7 @@ public class GetBookingTest extends BaseTest {
     public void validaSchemaDaListagemDeReservas(){
         getBookingRequest.bookingReturnIds()
                 .then()
-                .statusCode(200)
+                .statusCode(HttpStatus.SC_OK)
                 .body(matchesJsonSchema(new File(Utils.getSchemaBasePath("booking","bookings"))));
 
     }
@@ -175,7 +168,7 @@ public class GetBookingTest extends BaseTest {
         getBookingRequest.bookingReturnIdsWithFilters("firstname","Jim","","",
                         "","","","")
                 .then()
-                .statusCode(200)
+                .statusCode(HttpStatus.SC_OK)
                 .body(matchesJsonSchema(new File(Utils.getSchemaBasePath("booking","bookings"))));
 
     }
@@ -187,7 +180,7 @@ public class GetBookingTest extends BaseTest {
     public void validaSchemaDaListagemDeReservaPorId(){
         getBookingRequest.bookingById(getBookingRequest.bookingFirstId())
                 .then()
-                .statusCode(200)
+                .statusCode(HttpStatus.SC_OK)
                 .body(matchesJsonSchema(new File(Utils.getSchemaBasePath("booking","getBookingById"))));
 
     }
@@ -201,7 +194,7 @@ public class GetBookingTest extends BaseTest {
         getBookingRequest.bookingReturnIdsWithFilters("firstname","45236698","checkin","2017-50-50",
                         "checkout","2018-04-29","","")
                 .then()
-                .statusCode(500);
+                .statusCode(HttpStatus.SC_INTERNAL_SERVER_ERROR);
 
     }
 

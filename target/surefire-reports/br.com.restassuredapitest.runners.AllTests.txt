@@ -1,52 +1,52 @@
 -------------------------------------------------------------------------------
 Test set: br.com.restassuredapitest.runners.AllTests
 -------------------------------------------------------------------------------
-Tests run: 29, Failures: 0, Errors: 6, Skipped: 0, Time elapsed: 48.134 s <<< FAILURE! - in br.com.restassuredapitest.runners.AllTests
-validarListagemDeIdsComFiltroNomeECheckinECheckout(br.com.restassuredapitest.testes.booking.testes.GetBookingTest)  Time elapsed: 1.83 s  <<< ERROR!
+Tests run: 29, Failures: 0, Errors: 6, Skipped: 0, Time elapsed: 47.037 s <<< FAILURE! - in br.com.restassuredapitest.runners.AllTests
+validarListagemDeIdsComFiltroNomeECheckinECheckout(br.com.restassuredapitest.testes.booking.testes.GetBookingTest)  Time elapsed: 1.819 s  <<< ERROR!
 groovy.lang.GroovyRuntimeException: 
 could not access constructor: private java.lang.AssertionError(java.lang.String) with arguments: [1 expectation failed.
 JSON path bookingid doesn't match.
-Expected: a collection containing <674>
+Expected: (a collection containing <813>)
   Actual: []
 ] reason: java.lang.IllegalAccessException: class org.codehaus.groovy.reflection.CachedConstructor cannot access a member of class java.lang.AssertionError (in module java.base) with modifiers "private"
-	at br.com.restassuredapitest.testes.booking.testes.GetBookingTest.validarListagemDeIdsComFiltroNomeECheckinECheckout(GetBookingTest.java:125)
+	at br.com.restassuredapitest.testes.booking.testes.GetBookingTest.validarListagemDeIdsComFiltroNomeECheckinECheckout(GetBookingTest.java:119)
 
-validarListagemDeIdsComFiltroCheckin(br.com.restassuredapitest.testes.booking.testes.GetBookingTest)  Time elapsed: 1.764 s  <<< ERROR!
+validarListagemDeIdsComFiltroCheckin(br.com.restassuredapitest.testes.booking.testes.GetBookingTest)  Time elapsed: 1.736 s  <<< ERROR!
 groovy.lang.GroovyRuntimeException: 
 could not access constructor: private java.lang.AssertionError(java.lang.String) with arguments: [1 expectation failed.
 JSON path bookingid doesn't match.
-Expected: a collection containing <676>
+Expected: (a collection containing <815>)
   Actual: [102, 135, 230, 142, 202, 164, 43, 130, 280, 51, 42, 406, 134, 113, 177, 136, 46, 52, 124]
 ] reason: java.lang.IllegalAccessException: class org.codehaus.groovy.reflection.CachedConstructor cannot access a member of class java.lang.AssertionError (in module java.base) with modifiers "private"
-	at br.com.restassuredapitest.testes.booking.testes.GetBookingTest.validarListagemDeIdsComFiltroCheckin(GetBookingTest.java:82)
+	at br.com.restassuredapitest.testes.booking.testes.GetBookingTest.validarListagemDeIdsComFiltroCheckin(GetBookingTest.java:78)
 
-validarListagemDeIdsComFiltroCheckinECheckout(br.com.restassuredapitest.testes.booking.testes.GetBookingTest)  Time elapsed: 1.851 s  <<< ERROR!
+validarListagemDeIdsComFiltroCheckinECheckout(br.com.restassuredapitest.testes.booking.testes.GetBookingTest)  Time elapsed: 1.766 s  <<< ERROR!
 groovy.lang.GroovyRuntimeException: 
 could not access constructor: private java.lang.AssertionError(java.lang.String) with arguments: [1 expectation failed.
-JSON path size() doesn't match.
-Expected: a value greater than <0>
-  Actual: 0
+JSON path bookingid doesn't match.
+Expected: (a collection containing <817>)
+  Actual: []
 ] reason: java.lang.IllegalAccessException: class org.codehaus.groovy.reflection.CachedConstructor cannot access a member of class java.lang.AssertionError (in module java.base) with modifiers "private"
-	at br.com.restassuredapitest.testes.booking.testes.GetBookingTest.validarListagemDeIdsComFiltroCheckinECheckout(GetBookingTest.java:111)
+	at br.com.restassuredapitest.testes.booking.testes.GetBookingTest.validarListagemDeIdsComFiltroCheckinECheckout(GetBookingTest.java:105)
 
-validarCadastroDeNovaReservaComInfoExtra(br.com.restassuredapitest.testes.booking.testes.PostBookingTest)  Time elapsed: 0.86 s  <<< ERROR!
+validarCadastroDeNovaReservaComInfoExtra(br.com.restassuredapitest.testes.booking.testes.PostBookingTest)  Time elapsed: 0.809 s  <<< ERROR!
 groovy.lang.GroovyRuntimeException: 
 could not access constructor: private java.lang.AssertionError(java.lang.String) with arguments: [1 expectation failed.
 Expected status code <400> but was <200>.
 ] reason: java.lang.IllegalAccessException: class org.codehaus.groovy.reflection.CachedConstructor cannot access a member of class java.lang.AssertionError (in module java.base) with modifiers "private"
-	at br.com.restassuredapitest.testes.booking.testes.PostBookingTest.validarCadastroDeNovaReservaComInfoExtra(PostBookingTest.java:127)
+	at br.com.restassuredapitest.testes.booking.testes.PostBookingTest.validarCadastroDeNovaReservaComInfoExtra(PostBookingTest.java:128)
 
-barrarCadastroDeNovaReservaSemAutenticacao(br.com.restassuredapitest.testes.booking.testes.PostBookingTest)  Time elapsed: 0.849 s  <<< ERROR!
+barrarCadastroDeNovaReservaSemAutenticacao(br.com.restassuredapitest.testes.booking.testes.PostBookingTest)  Time elapsed: 0.85 s  <<< ERROR!
 groovy.lang.GroovyRuntimeException: 
 could not access constructor: private java.lang.AssertionError(java.lang.String) with arguments: [1 expectation failed.
 Expected status code <401> but was <200>.
 ] reason: java.lang.IllegalAccessException: class org.codehaus.groovy.reflection.CachedConstructor cannot access a member of class java.lang.AssertionError (in module java.base) with modifiers "private"
-	at br.com.restassuredapitest.testes.booking.testes.PostBookingTest.barrarCadastroDeNovaReservaSemAutenticacao(PostBookingTest.java:71)
+	at br.com.restassuredapitest.testes.booking.testes.PostBookingTest.barrarCadastroDeNovaReservaSemAutenticacao(PostBookingTest.java:72)
 
-recusarCadastroDeNovaReservaComDataAnterior(br.com.restassuredapitest.testes.booking.testes.PostBookingTest)  Time elapsed: 0.852 s  <<< ERROR!
+recusarCadastroDeNovaReservaComDataAnterior(br.com.restassuredapitest.testes.booking.testes.PostBookingTest)  Time elapsed: 0.894 s  <<< ERROR!
 groovy.lang.GroovyRuntimeException: 
 could not access constructor: private java.lang.AssertionError(java.lang.String) with arguments: [1 expectation failed.
 Expected status code <422> but was <200>.
 ] reason: java.lang.IllegalAccessException: class org.codehaus.groovy.reflection.CachedConstructor cannot access a member of class java.lang.AssertionError (in module java.base) with modifiers "private"
-	at br.com.restassuredapitest.testes.booking.testes.PostBookingTest.recusarCadastroDeNovaReservaComDataAnterior(PostBookingTest.java:91)
+	at br.com.restassuredapitest.testes.booking.testes.PostBookingTest.recusarCadastroDeNovaReservaComDataAnterior(PostBookingTest.java:92)
 

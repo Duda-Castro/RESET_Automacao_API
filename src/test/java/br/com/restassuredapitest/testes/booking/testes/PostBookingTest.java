@@ -12,6 +12,7 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.junit4.DisplayName;
+import org.apache.http.HttpStatus;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -41,7 +42,7 @@ public class PostBookingTest extends BaseTest {
         postBookingRequest.bookingCreate(firstname,lastname,
                         totalprice,depositpaid,checkin,checkout)
                 .then()
-                .statusCode(200)
+                .statusCode(HttpStatus.SC_OK)
                 .body("size()",greaterThan(0))
                 .body("booking.firstname",equalTo(firstname))
                 .body("booking.lastname",equalTo(lastname))
@@ -55,7 +56,7 @@ public class PostBookingTest extends BaseTest {
     @Test
     @Severity(SeverityLevel.BLOCKER)
     @Category({AllTests.class, AcceptanceCriticalTest.class})
-    @DisplayName("Criar uma nova reserva com sucesso.")
+    @DisplayName("Validar recusa de uma nova reserva sem autenticação.")
     public void barrarCadastroDeNovaReservaSemAutenticacao(){
 
         String firstname = new Faker().lordOfTheRings().character();
@@ -68,14 +69,14 @@ public class PostBookingTest extends BaseTest {
         postBookingRequest.bookingCreate(firstname,lastname,
                         totalprice,depositpaid,checkin,checkout)
                 .then()
-                .statusCode(401);
+                .statusCode(HttpStatus.SC_UNAUTHORIZED);
 
     }
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
     @Category({AllTests.class, AcceptanceCriticalTest.class})
-    @DisplayName("Criar uma nova reserva com sucesso.")
+    @DisplayName("Validar recusa de uma nova reserva com data no passado.")
     public void recusarCadastroDeNovaReservaComDataAnterior(){
 
         String firstname = new Faker().lordOfTheRings().character();
@@ -88,7 +89,7 @@ public class PostBookingTest extends BaseTest {
         postBookingRequest.bookingCreate(firstname,lastname,
                         totalprice,depositpaid,checkin,checkout)
                 .then()
-                .statusCode(422);
+                .statusCode(HttpStatus.SC_UNPROCESSABLE_ENTITY);
 
 
     }
@@ -101,7 +102,7 @@ public class PostBookingTest extends BaseTest {
 
         postBookingRequest.bookingCreateInvalid()
                 .then()
-                .statusCode(500);
+                .statusCode(HttpStatus.SC_INTERNAL_SERVER_ERROR);
 
     }
 
@@ -124,18 +125,7 @@ public class PostBookingTest extends BaseTest {
                         totalprice,depositpaid,checkin,checkout,peso,
                         altura,signo,pet)
                 .then()
-                .statusCode(400)
-                .body("size()",greaterThan(0))
-                .body("booking.firstname",equalTo(firstname))
-                .body("booking.lastname",equalTo(lastname))
-                .body("booking.totalprice",equalTo(totalprice))
-                .body("booking.depositpaid",equalTo(depositpaid))
-                .body("booking.bookingdates.checkin",equalTo(checkin))
-                .body("booking.bookingdates.checkout",equalTo(checkout))
-                .body("booking.peso",equalTo(peso))
-                .body("booking.altura",equalTo(altura))
-                .body("booking.signo",equalTo(signo))
-                .body("booking.pet",equalTo(pet));
+                .statusCode(HttpStatus.SC_BAD_REQUEST);
 
     }
 
@@ -155,7 +145,7 @@ public class PostBookingTest extends BaseTest {
         postBookingRequest.bookingCreate(firstname,lastname,
                         totalprice,depositpaid,checkin,checkout)
                 .then()
-                .statusCode(200)
+                .statusCode(HttpStatus.SC_OK)
                 .body("size()",greaterThan(0))
                 .body("booking.firstname",equalTo(firstname))
                 .body("booking.lastname",equalTo(lastname))
@@ -174,7 +164,7 @@ public class PostBookingTest extends BaseTest {
         postBookingRequest.bookingCreate(firstname2,lastname2,
                         totalprice2,depositpaid2,checkin2,checkout2)
                 .then()
-                .statusCode(200)
+                .statusCode(HttpStatus.SC_OK)
                 .body("size()",greaterThan(0))
                 .body("booking.firstname",equalTo(firstname2))
                 .body("booking.lastname",equalTo(lastname2))
@@ -194,7 +184,7 @@ public class PostBookingTest extends BaseTest {
         postBookingRequest.bookingCreate("Jim","Brown",
                         111,true,"2018-01-01","2019-01-01")
                 .then()
-                .statusCode(200)
+                .statusCode(HttpStatus.SC_OK)
                 .body(matchesJsonSchema(new File(Utils.getSchemaBasePath("booking","postBooking"))));
 
 

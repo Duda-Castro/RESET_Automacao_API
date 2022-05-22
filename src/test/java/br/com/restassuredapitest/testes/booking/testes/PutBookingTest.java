@@ -10,6 +10,7 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.junit4.DisplayName;
+import org.apache.http.HttpStatus;
 import org.json.JSONException;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -28,7 +29,7 @@ public class PutBookingTest extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Category({AllTests.class, AcceptanceCriticalTest.class})
     @DisplayName("Alterar uma reserva usando o token.")
-    public void validarAlteracaoDeUmaReservaUtilizandoToken() throws JSONException {
+    public void validarAlteracaoDeUmaReservaUtilizandoToken(){
         String nomeTrocado = new Faker().elderScrolls().firstName();
         String sobrenomeTrocado = new Faker().elderScrolls().lastName();
         int totalNewPrice = new  Faker().number().numberBetween(0,2000);
@@ -37,7 +38,7 @@ public class PutBookingTest extends BaseTest {
                         nomeTrocado,sobrenomeTrocado,
                         totalNewPrice,false,"2018-01-01","2019-01-01")
                 .then()
-                .statusCode(200)
+                .statusCode(HttpStatus.SC_OK)
                 .body("size()",greaterThan(0))
                 .body("firstname",equalTo(nomeTrocado))
                 .body("lastname",equalTo(sobrenomeTrocado))
@@ -50,7 +51,7 @@ public class PutBookingTest extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Category({AllTests.class, AcceptanceCriticalTest.class})
     @DisplayName("Alterar uma reserva usando o Basic auth.")
-    public void validarAlteracaoDeUmaReservaUtilizandoBasic() throws JSONException {
+    public void validarAlteracaoDeUmaReservaUtilizandoBasic(){
         String nomeTrocado = new Faker().elderScrolls().firstName();
         String sobrenomeTrocado = new Faker().elderScrolls().lastName();
         int totalNewPrice = new  Faker().number().numberBetween(0,2000);
@@ -58,7 +59,7 @@ public class PutBookingTest extends BaseTest {
         putBookingRequest.updateBookingBasic(getBookingRequest.bookingFirstId(),nomeTrocado,sobrenomeTrocado,
                         totalNewPrice,false,"2018-01-01","2019-01-01")
                 .then()
-                .statusCode(200)
+                .statusCode(HttpStatus.SC_OK)
                 .body("size()",greaterThan(0))
                 .body("firstname",equalTo(nomeTrocado))
                 .body("lastname",equalTo(sobrenomeTrocado))
@@ -72,7 +73,7 @@ public class PutBookingTest extends BaseTest {
     @Severity(SeverityLevel.BLOCKER)
     @Category({AllTests.class, SecurityTests.class})
     @DisplayName("Falhar ao alterar uma reserva quando o token não for enviado.")
-    public void validarAlteracaoDeUmaReservaSemToken() throws JSONException {
+    public void validarAlteracaoDeUmaReservaSemToken(){
         String nomeTrocado = new Faker().elderScrolls().firstName();
         String sobrenomeTrocado = new Faker().elderScrolls().lastName();
         int totalNewPrice = new  Faker().number().numberBetween(0,2000);
@@ -80,14 +81,14 @@ public class PutBookingTest extends BaseTest {
         putBookingRequest.updateBookingToken(postAuthRequest.getToken("",""),getBookingRequest.bookingFirstId(),nomeTrocado,sobrenomeTrocado,
                         totalNewPrice,true,"2018-01-01","2019-01-01")
                 .then()
-                .statusCode(403);
+                .statusCode(HttpStatus.SC_FORBIDDEN);
     }
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
     @Category({AllTests.class, SecurityTests.class})
     @DisplayName("Falhar ao alterar uma reserva quando o basic não for enviado")
-    public void validarAlteracaoDeUmaReservaSemBasic() throws JSONException {
+    public void validarAlteracaoDeUmaReservaSemBasic(){
         String nomeTrocado = new Faker().elderScrolls().firstName();
         String sobrenomeTrocado = new Faker().elderScrolls().lastName();
         int totalNewPrice = new  Faker().number().numberBetween(0,2000);
@@ -96,14 +97,14 @@ public class PutBookingTest extends BaseTest {
         putBookingRequest.updateBookingNoBasic(getBookingRequest.bookingFirstId(),nomeTrocado,sobrenomeTrocado,
                         totalNewPrice,true,"2018-01-01","2019-01-01")
                 .then()
-                .statusCode(403);
+                .statusCode(HttpStatus.SC_FORBIDDEN);
     }
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
     @Category({AllTests.class, SecurityTests.class})
     @DisplayName("Falhar ao alterar uma reserva quando o token enviado for inválido")
-    public void validarAlteracaoDeUmaReservaComTokenInvalido() throws JSONException {
+    public void validarAlteracaoDeUmaReservaComTokenInvalido(){
         String nomeTrocado = new Faker().elderScrolls().firstName();
         String sobrenomeTrocado = new Faker().elderScrolls().lastName();
         int totalNewPrice = new  Faker().number().numberBetween(0,2000);
@@ -112,7 +113,7 @@ public class PutBookingTest extends BaseTest {
         putBookingRequest.updateBookingWrongToken(getBookingRequest.bookingFirstId(),nomeTrocado,sobrenomeTrocado,
                         totalNewPrice,true,"2018-01-01","2019-01-01")
                 .then()
-                .statusCode(403);
+                .statusCode(HttpStatus.SC_FORBIDDEN);
     }
 
     @Test
@@ -126,7 +127,7 @@ public class PutBookingTest extends BaseTest {
         putBookingRequest.updateBookingToken(postAuthRequest.getToken("admin","password123"),-1, nomeTrocado,sobrenomeTrocado,
                         totalNewPrice,true,"2018-01-01","2019-01-01")
                 .then()
-                .statusCode(405);
+                .statusCode(HttpStatus.SC_METHOD_NOT_ALLOWED);
     }
 }
 

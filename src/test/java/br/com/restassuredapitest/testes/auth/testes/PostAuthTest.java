@@ -25,7 +25,7 @@ public class PostAuthTest extends BaseTest {
     @Severity(SeverityLevel.BLOCKER)
     @Category({AllTests.class})
     @DisplayName("Retorna token para o usuário")
-    public void validarRetornoTokenParaUsuario() throws JSONException {
+    public void validarRetornoTokenParaUsuario(){
 
         postAuthRequest.tokenReturn("admin","password123")
                 .then()

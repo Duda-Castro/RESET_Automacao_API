@@ -5,7 +5,7 @@ import org.json.JSONObject;
 
 public class BookingPayloads {
         public JSONObject payloadValidoBooking(String firstname,String lastname,Number totalprice,Boolean depositpaid,
-                                                      String checkin,String checkout) throws JSONException {
+                                                      String checkin,String checkout){
             JSONObject payload = new JSONObject();
             JSONObject bookingDates = new JSONObject();
 
@@ -23,7 +23,7 @@ public class BookingPayloads {
         return payload;
         }
 
-    public JSONObject payloadInvalido () throws JSONException {
+    public JSONObject payloadInvalido (){
         JSONObject payload = new JSONObject();
         JSONObject bookingDates = new JSONObject();
 
@@ -42,7 +42,7 @@ public class BookingPayloads {
     }
     public JSONObject payloadInfoExtra (String firstname,String lastname,Number totalprice,Boolean depositpaid,
                                         String checkin,String checkout, int peso, double altura,
-                                        String signo, String pet) throws JSONException {
+                                        String signo, String pet){
         JSONObject payload = new JSONObject();
         JSONObject bookingDates = new JSONObject();
 
@@ -65,7 +65,7 @@ public class BookingPayloads {
         return payload;
     }
 
-    public JSONObject payloadParcial (String firstname,String lastname) throws JSONException {
+    public JSONObject payloadParcial (String firstname,String lastname){
         JSONObject payload = new JSONObject();
 
 

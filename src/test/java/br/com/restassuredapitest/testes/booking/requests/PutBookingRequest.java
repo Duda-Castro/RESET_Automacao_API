@@ -14,7 +14,7 @@ public class PutBookingRequest {
     PostAuthRequest postAuthRequest = new PostAuthRequest();
     @Step("Alterar uma reserva usando o token.")
     public Response updateBookingToken(String token,Integer id,String firstname,String lastname,Number totalprice,Boolean depositpaid,
-                                       String checkin,String checkout) throws JSONException {
+                                       String checkin,String checkout){
 
         return given()
                 .header("Content-Type","application/json")

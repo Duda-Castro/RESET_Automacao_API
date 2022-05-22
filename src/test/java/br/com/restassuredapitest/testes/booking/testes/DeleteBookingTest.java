@@ -9,6 +9,7 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.junit4.DisplayName;
+import org.apache.http.HttpStatus;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -26,7 +27,7 @@ public class DeleteBookingTest extends BaseTest {
 
         deleteBookingRequest.excluiReservaSemHeader(getBookingRequest.bookingFirstId())
                 .then()
-                .statusCode(403);
+                .statusCode(HttpStatus.SC_FORBIDDEN);
 
     }
 
@@ -38,7 +39,7 @@ public class DeleteBookingTest extends BaseTest {
 
         deleteBookingRequest.excluiReservaComCookie(getBookingRequest.bookingFirstId(),"admin","password123")
                 .then()
-                .statusCode(201);
+                .statusCode(HttpStatus.SC_CREATED);
 
     }
 
@@ -50,7 +51,7 @@ public class DeleteBookingTest extends BaseTest {
 
         deleteBookingRequest.excluiReservaComAuthorisation(getBookingRequest.bookingFirstId())
                 .then()
-                .statusCode(201);
+                .statusCode(HttpStatus.SC_CREATED);
 
     }
     @Test
@@ -61,7 +62,7 @@ public class DeleteBookingTest extends BaseTest {
 
         deleteBookingRequest.excluiReservaComCookie( -1,"admin","password123")
                 .then()
-                .statusCode(405);
+                .statusCode(HttpStatus.SC_METHOD_NOT_ALLOWED);
 
     }
 
