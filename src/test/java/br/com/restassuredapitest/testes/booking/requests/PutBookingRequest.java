@@ -21,7 +21,6 @@ public class PutBookingRequest {
                 .header("Accept","application/json")
                 .header("Cookie",token)
                 .when()
-                .log().all()
                 .body(bookingPayloads.payloadValidoBooking(firstname,lastname,totalprice,depositpaid,checkin,checkout).toString())
                 .put("booking/" + id);
 
@@ -41,7 +40,6 @@ public class PutBookingRequest {
                 .header("Authorization","Basic YWRtaW46cGFzc3dvcmQxMjM=")
                 .queryParam("id",id)
                 .when()
-                .log().all()
                 .body(bookingPayloads.payloadValidoBooking(firstname,lastname,totalprice,depositpaid,checkin,checkout).toString())
                 .put("booking/" + id);
 
@@ -57,7 +55,6 @@ public class PutBookingRequest {
                 .header("Authorization"," ")
                 .queryParam("id",id)
                 .when()
-                .log().all()
                 .body(bookingPayloads.payloadValidoBooking(firstname,lastname,totalprice,depositpaid,checkin,checkout).toString())
                 .put("booking/" + id);
 
@@ -73,7 +70,6 @@ public class PutBookingRequest {
                 .header("Cookie","wrongcookie123")
                 .queryParam("id",id)
                 .when()
-                .log().all()
                 .body(bookingPayloads.payloadValidoBooking(firstname,lastname,totalprice,depositpaid,checkin,checkout).toString())
                 .put("booking/" + id);
 

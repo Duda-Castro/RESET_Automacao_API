@@ -33,7 +33,6 @@ public class PostBookingRequest {
                 .header("Content-Type","application/json")
                 .header("Accept","application/json")
                 .when()
-                .log().all()
                 .body(bookingPayloads.payloadInfoExtra(firstname,lastname,totalprice,
                         depositpaid,checkin,checkout,peso,altura,signo,pet).toString())
                 .post("booking");
@@ -50,7 +49,6 @@ public class PostBookingRequest {
                 .header("Content-Type","application/json")
                 .header("Accept","application/json")
                 .when()
-                .log().all()
                 .body(bookingPayloads.payloadInvalido().toString())
                 .post("booking");
 
