@@ -54,6 +54,47 @@ public class PostBookingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
+    @Category({AllTests.class, AcceptanceCriticalTest.class})
+    @DisplayName("Criar uma nova reserva com sucesso.")
+    public void barrarCadastroDeNovaReservaSemAutenticacao(){
+
+        String firstname = new Faker().lordOfTheRings().character();
+        String lastname = "The Mighty";
+        int totalprice = new Faker().random().nextInt(0,1000);
+        boolean depositpaid = true;
+        String checkin = "2022-0" + new Faker().random().nextInt(1,9) + "-01";
+        String checkout = "2023-0" + new Faker().random().nextInt(1,9) + "-01";
+
+        postBookingRequest.bookingCreate(firstname,lastname,
+                        totalprice,depositpaid,checkin,checkout)
+                .then()
+                .statusCode(401);
+
+    }
+
+    @Test
+    @Severity(SeverityLevel.BLOCKER)
+    @Category({AllTests.class, AcceptanceCriticalTest.class})
+    @DisplayName("Criar uma nova reserva com sucesso.")
+    public void recusarCadastroDeNovaReservaComDataAnterior(){
+
+        String firstname = new Faker().lordOfTheRings().character();
+        String lastname = "The Mighty";
+        int totalprice = new Faker().random().nextInt(0,1000);
+        boolean depositpaid = true;
+        String checkin = "2001-0" + new Faker().random().nextInt(1,9) + "-01";
+        String checkout = "2002-0" + new Faker().random().nextInt(1,9) + "-01";
+
+        postBookingRequest.bookingCreate(firstname,lastname,
+                        totalprice,depositpaid,checkin,checkout)
+                .then()
+                .statusCode(422);
+
+
+    }
+
+    @Test
+    @Severity(SeverityLevel.BLOCKER)
     @Category({AllTests.class, AcceptanceExceptionTest.class})
     @DisplayName("Falhar ao fazer a criação de reserva com payload inválido.")
     public void validarCadastroDeNovaReservaComPayloadInvalido(){
@@ -83,7 +124,7 @@ public class PostBookingTest extends BaseTest {
                         totalprice,depositpaid,checkin,checkout,peso,
                         altura,signo,pet)
                 .then()
-                .statusCode(500)
+                .statusCode(400)
                 .body("size()",greaterThan(0))
                 .body("booking.firstname",equalTo(firstname))
                 .body("booking.lastname",equalTo(lastname))

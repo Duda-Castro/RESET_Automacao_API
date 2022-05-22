@@ -22,7 +22,7 @@ public class DeleteBookingTest extends BaseTest {
     @Severity(SeverityLevel.BLOCKER)
     @Category({AllTests.class, SecurityTests.class})
     @DisplayName("Não permitir a exclusão de uma reserva sem autorização.")
-    public void validarExclusaoDeReservaSemHeader(){
+    public void barrarExclusaoDeReservaSemHeader(){
 
         deleteBookingRequest.excluiReservaSemHeader(getBookingRequest.bookingFirstId())
                 .then()
