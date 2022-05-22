@@ -96,8 +96,21 @@ O correto seria o filtro buscar datas maiores e iguais a data informada.
 * Documentação solicita retorno 201 para os métodos (booking)DELETE e (ping)GET. Acredito ser mais correto o status 200.
 * Documentação solicita retorno 200 para os métodos (booking)POST e (auth)POST. Acredito ser mais correto o status 201.
 * Documentação está solicitando que o .header() de validação dos métodos PUT, PATCH e DELETE do booking
+<<<<<<< HEAD
   seja colocado "Authorisation" enquanto o correto é "Authorization". Acredito que seja um erro de digitação na documentação
   pois ao usar o Postman o .header() é automaticamente gerado com o termo correto.
 * API gera retorno 405 para os métodos (booking)PUT e (booking)DELETE ao informar uma reserva inexistente, acredito ser mais correto 404.
 * API gera retorno 500 para o método (booking)GET ao informar um filtro mal formatado, acredito ser mais correto 400.
 * API gera retorno 500 para o método (booking)POST ao informar um payload inválido ao body, acredito ser mais correto 400.
+=======
+seja colocado "Authorisation" enquanto o correto é "Authorization". Acredito que seja um erro de digitação na documentação
+pois ao usar o Postman o .header() é automaticamente gerado com o termo correto.
+* API gera retorno 405 para os métodos (booking)PUT e (booking)DELETE ao informar uma reserva inexistente, acredito ser mais correto 404.
+* API gera retorno 500 para o método (booking)GET ao informar um filtro mal formatado, acredito ser mais correto 400.
+* API gera retorno 500 para o método (booking)POST ao informar um payload inválido ao body, acredito ser mais correto 400.
+
+
+
+
+
+>>>>>>> 8849370677b1a7e533ac671a05b8a558ba30f678
