@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchema;
 import static org.hamcrest.Matchers.*;
 
-@Feature("Feature de cadastro de reservas")
+@Feature("Feature de atualização parcial de reservas")
 public class PatchBookingTest extends BaseTest {
 
     PatchBookingRequest patchBookingRequest = new PatchBookingRequest();

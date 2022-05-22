@@ -11,8 +11,7 @@ import static io.restassured.RestAssured.patch;
 public class PatchBookingRequest {
     BookingPayloads bookingPayloads = new BookingPayloads();
     PostAuthRequest postAuthRequest = new PostAuthRequest();
-    @Step("Alterar parcialmente uma reserva.")
-
+    @Step("Alterar parcialmente uma reserva com token.")
     public Response bookingAlterParcialInfo(int id,String username,String password,String firstname, String lastname){
 
         return given()
@@ -28,7 +27,7 @@ public class PatchBookingRequest {
 
 
     }
-
+    @Step("Alterar parcialmente uma reserva com Basic.")
     public Response bookingAlterParcialInfoBasic(int id,String firstname, String lastname){
 
         return given()

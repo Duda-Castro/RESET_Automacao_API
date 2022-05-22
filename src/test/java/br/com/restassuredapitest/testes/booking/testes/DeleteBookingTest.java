@@ -12,7 +12,7 @@ import io.qameta.allure.junit4.DisplayName;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
-@Feature("Feature de retorno de reservas")
+@Feature("Feature de exclusão de reservas")
 public class DeleteBookingTest extends BaseTest {
 
     DeleteBookingRequest deleteBookingRequest = new DeleteBookingRequest();
